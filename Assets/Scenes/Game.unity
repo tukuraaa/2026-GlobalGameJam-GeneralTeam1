@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 9803600998c48b140b2f7038d0fc2eb1, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -375,13 +375,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dccdc4b07aaf612488bd62929af2c29a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shooter
-  _xRange: 8
-  _yRange: 0
   _bulletPrefab: {fileID: 5087218474414337439, guid: fa8e8a6ed63843441a1b8248ce81e1ef, type: 3}
   _shootWaveInterval: 1
   _shootInterval: 0.1
   _shootWaveCount: 3
-  _bulletSpeed: 5
+  _arrivalTime: 5
+  _height: 2
 --- !u!4 &709533252
 Transform:
   m_ObjectHideFlags: 0
@@ -557,8 +556,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 0.9843074, b: 0.9415095, a: 1}
+  m_Intensity: 5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -620,13 +619,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 929480671}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.22287598, y: -0.59420717, z: 0.30877915, w: 0.7084488}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 43.059, y: -74.563, z: 13.667}
 --- !u!114 &929480674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -813,13 +812,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dccdc4b07aaf612488bd62929af2c29a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shooter
-  _xRange: 8
-  _yRange: 0
   _bulletPrefab: {fileID: 5087218474414337439, guid: fa8e8a6ed63843441a1b8248ce81e1ef, type: 3}
   _shootWaveInterval: 1
   _shootInterval: 0.1
   _shootWaveCount: 3
-  _bulletSpeed: 5
+  _arrivalTime: 5
+  _height: 2
 --- !u!4 &1675803541
 Transform:
   m_ObjectHideFlags: 0
