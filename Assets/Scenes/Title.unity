@@ -240,7 +240,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.09878959, g: 0.12580751, b: 0.18867922, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -457,9 +457,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa23a4188b76416c8e7fffdb4d7123b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MyTitleManager
-  titleView: {fileID: 0}
-  highScoreView: {fileID: 0}
-  gameOverView: {fileID: 0}
+  titleView: {fileID: 3334027955499540953}
+  highScoreView: {fileID: 1557647381684586898}
+  gameOverView: {fileID: 5711611771216203131}
 --- !u!224 &2137852774 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8158340105944620205, guid: 35460517211934af384705fe3d449268, type: 3}
@@ -543,7 +543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4486995441382314136, guid: 35460517211934af384705fe3d449268, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.98042804
       objectReference: {fileID: 0}
     - target: {fileID: 4729816844999893535, guid: 35460517211934af384705fe3d449268, type: 3}
       propertyPath: m_AnchorMax.y
@@ -560,6 +560,14 @@ PrefabInstance:
     - target: {fileID: 4729816844999893535, guid: 35460517211934af384705fe3d449268, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5119840944989595282, guid: 35460517211934af384705fe3d449268, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6508643049559602655, guid: 35460517211934af384705fe3d449268, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00012171847
       objectReference: {fileID: 0}
     - target: {fileID: 6843992351905093501, guid: 35460517211934af384705fe3d449268, type: 3}
       propertyPath: m_AnchorMax.x
@@ -674,6 +682,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35460517211934af384705fe3d449268, type: 3}
+--- !u!114 &1557647381684586898 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6337184575390790437, guid: 35460517211934af384705fe3d449268, type: 3}
+  m_PrefabInstance: {fileID: 1557647381684586897}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b25c97947cef4a5fb76bcadd8229447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HighScoreView
 --- !u!1001 &3334027955499540951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -780,6 +799,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6615782956898136635, guid: bbd591a335fe2b94aac966aaf8f565ca, type: 3}
   m_PrefabInstance: {fileID: 3334027955499540951}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3334027955499540953 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6598748195406724290, guid: bbd591a335fe2b94aac966aaf8f565ca, type: 3}
+  m_PrefabInstance: {fileID: 3334027955499540951}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c198cf4930e8345ad1fea00324c620, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TitleView
 --- !u!1001 &5711611771216203130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -881,6 +911,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a1e55ed49f3349ef89f8acdf79039a0, type: 3}
+--- !u!114 &5711611771216203131 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5538720571125107952, guid: 8a1e55ed49f3349ef89f8acdf79039a0, type: 3}
+  m_PrefabInstance: {fileID: 5711611771216203130}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d1e144911c4a40508396be257ce7424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameOverView
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

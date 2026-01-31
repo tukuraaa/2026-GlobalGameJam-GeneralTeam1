@@ -8,6 +8,7 @@ using UnityEngine;
 [Serializable]
 public class HighScoresObject
 {
+    //macos example: /Users/ivan/Library/Application Support/DefaultCompany/2026-GGJ-GeneralTeam1/hiscore.json
     public static string DataPath => Path.Combine(Application.persistentDataPath, "hiscore.json");
     public List<SingleHighScore> highScores;
 
@@ -19,14 +20,17 @@ public class HighScoresObject
 
     public static HighScoresObject LoadHighScore()
     {
+        Debug.Log($"path {DataPath}");
         if(TryReadDataFile(out string data))
         {
             return DeserializeHighScore(data);
         }
         else
         {
+            HighScoresObject newObj = new();
             TryCreateDataFile();
-            return new();
+            TryUpdateAll(newObj);
+            return newObj;
         }
     }    
 
@@ -37,11 +41,17 @@ public class HighScoresObject
 
     //Create - Read - Update - Delete
 
-    public static bool TryCreateDataFile()
+    public static bool TryCreateDataFile(string content = "")
     {
         if (!File.Exists(DataPath))
         {
-            File.CreateText(DataPath);
+            StreamWriter fileStream = File.CreateText(DataPath);
+            if (!string.IsNullOrEmpty(content))
+            {
+                fileStream.Write(content);
+            }
+            fileStream.DisposeAsync();
+            fileStream.Close();
             return true;
         }
         else
@@ -60,6 +70,13 @@ public class HighScoresObject
             result = File.ReadAllText(DataPath);
             return true;
         }
+    }
+
+    public static bool TryUpdateAll(HighScoresObject obj)
+    {
+        string data = JsonConvert.SerializeObject(obj);
+        File.WriteAllText(DataPath, data);
+        return true;
     }
 
     public static bool TryUpdateDataFile(SingleHighScore newHighScore)

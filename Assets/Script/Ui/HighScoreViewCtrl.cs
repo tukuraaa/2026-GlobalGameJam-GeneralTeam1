@@ -13,10 +13,9 @@ public class HighScoreViewCtrl
 
     void init()
     {
-        _view.OnMainMenu.SubscribeAwait(async (_, ct)=>
+        _view.OnMainMenu.Subscribe((_)=>
         {
             TitleManager.Instance.BackToMainMenu();
-            await UniTask.NextFrame();
         }).AddTo(_view);
     }    
 }

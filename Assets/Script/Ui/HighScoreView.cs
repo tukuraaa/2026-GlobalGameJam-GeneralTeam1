@@ -39,7 +39,10 @@ public class HighScoreView : MonoBehaviour
         else
         {
             Debug.Log($"やば。");
+            HighScoresObject.TryCreateDataFile();
+            highScores = HighScoresObject.LoadHighScore();
+            
         }
-        
+        new HighScoreViewCtrl(this);
     }
 }
