@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1480287527214510351
+--- !u!114 &-5974093930754370048
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: atomosphere
+  m_Name: mat_moonatomosphere
   m_Shader: {fileID: -6465566751694194690, guid: 18ab1c594484e3f4a9a8387a26595830, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -128,12 +128,12 @@ Material:
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
-    - _atomosphere_size: 12.84
+    - _atomosphere_size: 5.76
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _atomosphere_color: {r: 0, g: 0.8635826, b: 1, a: 1}
+    - _atomosphere_color: {r: 0.78867924, g: 0.5980587, b: 0.31398356, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
