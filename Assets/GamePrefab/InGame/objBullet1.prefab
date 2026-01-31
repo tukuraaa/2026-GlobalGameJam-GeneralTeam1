@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3974780749404170560}
   - component: {fileID: 6459985082194080851}
   m_Layer: 0
-  m_Name: objBullet
+  m_Name: objBullet1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +70,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: a7344dfd96b46e94a9b76bf11f1879e3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157,11 +157,11 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 1
-  Lifetime: -1
   MaxTargets: -1
   ContinuousInterval: 0
   BaseDamagePoint: 1
   HitTimes: 1
+  OwnerShooter: {fileID: 0}
 --- !u!114 &6459985082194080851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,5 +174,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07488eff00d04234dbebbe0aca26ec7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseMover
-  MoveSpeed: 0
-  MoveDirection: {x: 0, y: 0, z: 1}
+  IsInit: 0

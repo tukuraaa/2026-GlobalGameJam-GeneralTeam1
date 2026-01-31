@@ -120,6 +120,20 @@ public class Shooter : MonoBehaviour
         {
             mover.Initialize(_arrivalTime, targetPosition);
         }
+
+         var psList = bullet.GetComponentsInChildren<ParticleSystem>(true);
+        foreach (var ps in psList)
+        {
+            resetPs(ps).Forget();
+        }
+    }
+
+    async UniTaskVoid resetPs(ParticleSystem ps)
+    {
+        ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        ps.Clear(true);
+        await UniTask.DelayFrame(0);
+        ps.Play();
     }
 
     public void OnDamageObjHit(DamageObj damageObj, Collider other)
