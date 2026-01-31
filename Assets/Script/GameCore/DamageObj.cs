@@ -12,6 +12,8 @@ public class DamageObj : MonoBehaviour
     public int HitTimes = 1;
 
     public Shooter OwnerShooter;
+    public AudioClip _hitPlayerSe = null;
+    public PlayHitObj _playHitObj = null;
 
     void Awake()
     {
@@ -20,6 +22,12 @@ public class DamageObj : MonoBehaviour
             if (Lifetime.Value > 0)
                 OwnerShooter.BulletPool.Release(this.gameObject);
         }).AddTo(this);
+
+        if(_playHitObj == null)
+        {
+            _playHitObj = GetComponent<PlayHitObj>();
+        }
+        _playHitObj.OnHitPlayer += () => { AudioManager.Instance.PlayOneShotSe(_hitPlayerSe); };
     }
     void OnTriggerEnter(Collider other)
     {
