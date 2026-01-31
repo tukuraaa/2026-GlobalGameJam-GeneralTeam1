@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8407549257925676797}
   - component: {fileID: 4451441881122885074}
   - component: {fileID: 5114279458174929302}
+  - component: {fileID: 8047783321853476797}
   m_Layer: 0
   m_Name: objPlayer2
   m_TagString: Player
@@ -203,6 +204,46 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &8047783321853476797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2915793171239070598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a63e35ac89d1a45caa18d6a0084df78b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPower
+  fullDuration: 5
+  powerType: 0
+  playerInput: {fileID: 5114279458174929302}
+  usePowerInputAction:
+    m_Name: Use Power Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 31a12597-64aa-44c2-915c-469bc0623a4e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 41c0937b-1a7f-4532-83ac-c368678b9ca6
+      m_Path: <Keyboard>/w
+      m_Interactions: Hold
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 58a299a7-6275-4017-9a47-bf0a6edab3b4
+      m_Path: <Gamepad>/leftShoulder
+      m_Interactions: Hold
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1001 &2742062589713852839
 PrefabInstance:
   m_ObjectHideFlags: 0

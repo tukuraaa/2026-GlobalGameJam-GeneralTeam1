@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1233959123618071674}
   - component: {fileID: 3834592576802452476}
   - component: {fileID: 2369853030728831220}
+  - component: {fileID: 7899966765312709806}
   m_Layer: 0
   m_Name: objPlayer1
   m_TagString: Player
@@ -203,6 +204,46 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &7899966765312709806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8763340661703558685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a63e35ac89d1a45caa18d6a0084df78b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPower
+  fullDuration: 5
+  powerType: 0
+  playerInput: {fileID: 2369853030728831220}
+  usePowerInputAction:
+    m_Name: Use Power Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b3a06677-d68b-4beb-be34-dfd4ecb6c760
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: ba093e87-2a7f-41d2-8cd6-34d36c956cc0
+      m_Path: <Keyboard>/upArrow
+      m_Interactions: Hold
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 06646d14-de53-49a0-899e-ab487cc0faf4
+      m_Path: <Gamepad>/rightShoulder
+      m_Interactions: Hold
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1001 &3747044280926477910
 PrefabInstance:
   m_ObjectHideFlags: 0
