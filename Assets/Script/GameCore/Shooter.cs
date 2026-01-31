@@ -44,8 +44,8 @@ public class Shooter : MonoBehaviour
             },
             actionOnRelease: (obj) =>
             {
-                obj.SetActive(false);
                 obj.GetComponent<BaseMover>().IsInit = false;
+                obj.SetActive(false);
             },
             actionOnDestroy: (obj) =>
             {
@@ -111,8 +111,7 @@ public class Shooter : MonoBehaviour
         var damageObj = bullet.GetComponent<DamageObj>();
         if (damageObj != null)
         {
-            damageObj.OwnerShooter = this;
-            damageObj.Lifetime.Value = _arrivalTime + 1f; // 弾の寿命を設定 （+1はバッファ）
+            damageObj.Initialize(this, _arrivalTime + 1f); // 弾の寿命を設定 （+1はバッファ）
         }
 
         var mover = bullet.GetComponent<BaseMover>();
