@@ -1,3 +1,4 @@
+using R3;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,9 @@ public class GameView : MonoBehaviour
     TextMeshProUGUI _txtHitTimes;
     [SerializeField]
     TextMeshProUGUI _txtHp;
+    [SerializeField]
+    Button _resetButton;
+    public Observable<Unit> ResetButtonClicked => _resetButton.OnClickAsObservable();
 
     void Start()
     {

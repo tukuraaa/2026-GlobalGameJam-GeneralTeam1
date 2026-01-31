@@ -16,6 +16,12 @@ public class GameViewCtrl
     void init()
     {
         var stage = Stage.Instance;
+
+        _view.ResetButtonClicked.Subscribe((_) =>
+        {
+            onReset().Forget();
+        }).AddTo(_view);
+
         stage.EarthUnit.LifePoint.Subscribe(x =>
         {
             _view.UpdateHp(x);
@@ -34,5 +40,10 @@ public class GameViewCtrl
                 }
             ).AddTo(_view);
         }
+    }
+
+    async UniTaskVoid onReset()
+    {
+        MySceneManager.Instance.LoadSceneAsync("Game").Forget();
     }
 }
