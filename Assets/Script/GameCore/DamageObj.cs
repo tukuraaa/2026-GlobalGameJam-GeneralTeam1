@@ -14,7 +14,8 @@ public class DamageObj : MonoBehaviour
 
     private bool _isFirstInitialize = true;
     public Shooter OwnerShooter;
-    public AudioClip _hitPlayerSe = null;
+    public AudioClip HitPlayerSe = null;
+    public AudioClip HitEarthSe = null;
     public PlayHitObj _playHitObj = null;
 
     void Awake()
@@ -23,7 +24,6 @@ public class DamageObj : MonoBehaviour
         {
             _playHitObj = GetComponent<PlayHitObj>();
         }
-        _playHitObj.OnHitPlayer += () => { AudioManager.Instance.PlayOneShotSe(_hitPlayerSe); };
     }
 
     public void Initialize(Shooter owner, float lifetime)

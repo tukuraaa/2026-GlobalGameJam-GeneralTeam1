@@ -164,7 +164,8 @@ MonoBehaviour:
   BaseScorePoint: 0
   HitTimes: 1
   OwnerShooter: {fileID: 0}
-  _hitPlayerSe: {fileID: 8300000, guid: 506a439645917a649a56fc638c090c2e, type: 3}
+  HitPlayerSe: {fileID: 8300000, guid: 506a439645917a649a56fc638c090c2e, type: 3}
+  HitEarthSe: {fileID: 8300000, guid: 506a439645917a649a56fc638c090c2e, type: 3}
   _playHitObj: {fileID: 0}
 --- !u!114 &-4613646157870044833
 MonoBehaviour:

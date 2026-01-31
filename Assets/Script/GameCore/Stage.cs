@@ -19,18 +19,23 @@ public class Stage : Singleton<Stage>
                 {
                     if(hitMsg.HitObj.gameObject.GetInstanceID() == EarthUnit.gameObject.GetInstanceID())
                     {
-                        if (hitMsg.DamageObj.BaseDamagePoint > 0) // damage
+                        if (hitMsg.DamageObj.BaseDamagePoint >= 0) // damage
                         {
                             EarthUnit.LifePoint.Value -= hitMsg.DamageObj.BaseDamagePoint;
+                            AudioManager.Instance.PlayOneShotSe(hitMsg.DamageObj.HitEarthSe);
                         }
                         Debug.Log($"EarthUnit Hit! Remaining LifePoint: {EarthUnit.LifePoint.Value}");
                     }
                     else if(hitMsg.HitObj.gameObject.GetInstanceID() == Player.gameObject.GetInstanceID())
                     {
-                        if(hitMsg.DamageObj.BaseDamagePoint < 0) // heal
+                        AudioManager.Instance.PlayOneShotSe(hitMsg.DamageObj.HitPlayerSe);
+
+                        if(hitMsg.DamageObj.BaseDamagePoint < 0)
                         {
+                            // heal
                             EarthUnit.LifePoint.Value -= hitMsg.DamageObj.BaseDamagePoint;
                         }
+
                         if (hitMsg.DamageObj.BaseScorePoint > 0)
                         {
                             // ÉXÉRÉAëùÇ¶ÇÈèàóù
