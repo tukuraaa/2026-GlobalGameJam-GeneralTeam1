@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Default Local Group
   m_GUID: 1bc2b884cd34044b294007e113f6fcd7
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: fca3f84099f7f5c40bf94136e73cf539
+    m_Address: Assets/Artist/barrier/mat_barrier.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3cb0f11aea58343668e59c86d9627e65, type: 2}
   m_SchemaSet:
