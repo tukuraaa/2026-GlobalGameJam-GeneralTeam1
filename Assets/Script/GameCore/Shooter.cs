@@ -54,6 +54,16 @@ public class Shooter : MonoBehaviour
             defaultCapacity: 10, //仮
             maxSize: 100 // 仮
         );
+
+
+        Stage.Instance.NowLevel.Subscribe((level) =>
+        {
+            // レベルに応じてパラメータを変更
+            _arrivalTime = DataConst.ShooterArriveTime(level);
+            _shootWaveCount = DataConst.ShootWaveCount(level);
+            _shootWaveInterval = DataConst.ShootWaveInterval(level);
+        }).AddTo(this);
+        
         StartShooting();
     }
 

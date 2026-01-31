@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3, y: 1, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5488419797517195492}
@@ -63,8 +63,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 1.2, z: 1.2}
+  m_Center: {x: -0.25, y: 0, z: 0}
 --- !u!114 &4451441881122885074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,13 +77,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 527e6b68a79b49542ae627e89e7a12bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  _centerPos: {x: 0, y: 1, z: 0}
-  _speed: 5
-  _radiusA: 3
-  _radiusB: 3
+  _centerPos: {x: 0, y: 0, z: 0}
+  _speed: 12
+  _radiusA: 3.5
+  _radiusB: 3.5
   HorizontalX: 0
   VerticalY: 0
   IsMoving: 0
+  _currentAngle: 0
 --- !u!114 &5114279458174929302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,8 +270,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7020227206941223929, guid: b4155cdc63c751e4f8d65fc31b333636, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5893044193684717643}
   m_SourcePrefab: {fileID: 100100000, guid: b4155cdc63c751e4f8d65fc31b333636, type: 3}
+--- !u!1 &5143418734409122398 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7020227206941223929, guid: b4155cdc63c751e4f8d65fc31b333636, type: 3}
+  m_PrefabInstance: {fileID: 2742062589713852839}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5893044193684717643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5143418734409122398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b17ab6aff8602742b5d504721a3e9a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectRotation
+  rotationSpeed: {x: 0, y: 50, z: 0}
 --- !u!4 &5488419797517195492 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7649095547385803075, guid: b4155cdc63c751e4f8d65fc31b333636, type: 3}

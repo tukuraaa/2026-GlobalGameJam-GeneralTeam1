@@ -5,7 +5,7 @@ public class SinWaveMover : BaseMover
     Vector3 _linearPos;
     Vector3 _unitVec;
     //[SerializeField]
-    float _sinSpeed = 3f;
+    float _sinSpeed = 1.5f;
     float _sinOffset = 1f;
     float _amp = 2f;
     float _ampOffset = 0.5f;
@@ -19,7 +19,7 @@ public class SinWaveMover : BaseMover
         Debug.Log(_linearPos);
         // �U���̐ݒ�������ł���H
 
-        _sinSpeed += Random.Range(-_sinOffset, _sinOffset);
+        _sinSpeed += Random.Range(-_sinOffset, _sinOffset) * DataConst.SinSpeedRate(Stage.Instance.NowLevel.CurrentValue);
         _amp += Random.Range(-_ampOffset, _ampOffset);
     }
 
