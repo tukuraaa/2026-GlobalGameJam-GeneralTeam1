@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using R3;
 using UnityEngine;
 
 public class HighScoreViewCtrl
@@ -11,6 +13,10 @@ public class HighScoreViewCtrl
 
     void init()
     {
-        
+        _view.OnMainMenu.SubscribeAwait(async (_, ct)=>
+        {
+            TitleManager.Instance.BackToMainMenu();
+            await UniTask.NextFrame();
+        }).AddTo(_view);
     }    
 }

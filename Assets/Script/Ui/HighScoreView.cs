@@ -1,18 +1,37 @@
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HighScoreView : MonoBehaviour
 {
     [SerializeField]
-    ScrollRect highScoreView;
+    ScrollRect highScoreScroll;
+    
+    [SerializeField]
+    Button mainMenuButton;
+    private HighScoresObject highScores;
+
+    public Observable<Unit> OnMainMenu => mainMenuButton.OnClickAsObservable();
 
     void OnValidate()
     {
-        if(highScoreView == null)
+        if(mainMenuButton == null)
         {
-            highScoreView = transform.Find("HighScoreView").GetComponent<ScrollRect>();
+            mainMenuButton = transform.Find("MainMenuButton").GetComponent<Button>();
+        }
+        if(highScoreScroll == null)
+        {
+            highScoreScroll = transform.Find("HighScoreScroll").GetComponent<ScrollRect>();
         }
 
     }
-
+    void Start()
+    {
+        highScores = HighScoresObject.LoadHighScore();
+        Debug.Log($"number of high scores: {highScores.highScores.Count}");
+        foreach (SingleHighScore highscore in highScores.highScores)
+        {
+            Debug.Log(highscore);
+        }
+    }
 }

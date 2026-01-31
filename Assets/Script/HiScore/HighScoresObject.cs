@@ -2,16 +2,33 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
 
 [Serializable]
 public class HighScoresObject
 {
-    public string DataPath => Path.Combine(Application.persistentDataPath, "hiscore.json");
+    public static string DataPath => Path.Combine(Application.persistentDataPath, "hiscore.json");
     public List<SingleHighScore> highScores;
-    
+
+
+    public HighScoresObject()
+    {
+        highScores = new();
+    }
+
+    public static HighScoresObject LoadHighScore()
+    {
+        if(TryReadDataFile(out string data))
+        {
+            return DeserializeHighScore(data);
+        }
+        else
+        {
+            TryCreateDataFile();
+            return new();
+        }
+    }    
 
     public static HighScoresObject DeserializeHighScore(string data)
     {
@@ -20,7 +37,7 @@ public class HighScoresObject
 
     //Create - Read - Update - Delete
 
-    public bool TryCreateDataFile()
+    public static bool TryCreateDataFile()
     {
         if (!File.Exists(DataPath))
         {
@@ -31,7 +48,7 @@ public class HighScoresObject
             return false;
     }
 
-    public bool TryReadDataFile(out string result)
+    public static bool TryReadDataFile(out string result)
     {
         if (!File.Exists(DataPath))
         {
@@ -45,11 +62,13 @@ public class HighScoresObject
         }
     }
 
-    public bool TryUpdateDataFile(SingleHighScore newHighScore)
+    public static bool TryUpdateDataFile(SingleHighScore newHighScore)
     {
-        highScores.Add(newHighScore);
-        string test = JsonConvert.SerializeObject(this);
+        HighScoresObject obj = LoadHighScore();
+        obj.highScores.Add(newHighScore);
+        string test = JsonConvert.SerializeObject(obj);
         File.WriteAllText(DataPath, test);
         return true;
     }
+
 }

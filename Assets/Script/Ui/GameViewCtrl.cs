@@ -45,5 +45,6 @@ public class GameViewCtrl
     async UniTaskVoid onReset()
     {
         MySceneManager.Instance.LoadSceneAsync("Game").Forget();
+        await UniTask.NextFrame();
     }
 }
