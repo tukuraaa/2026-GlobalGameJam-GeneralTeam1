@@ -21,6 +21,7 @@ public class TitleViewCtrl
         _view.OnHighScore.SubscribeAwait(async(_, ct) =>
         {
             await UniTask.WaitForEndOfFrame();
+            TitleManager.Instance.ShowHighScore();
         }).AddTo(_view);
 
         _view.OnQuit.SubscribeAwait(async(_, ct) =>

@@ -1,6 +1,8 @@
-using UnityEngine;
 using R3;
 using Cysharp.Threading.Tasks;
+using System.Threading.Tasks;
+using System.Threading;
+using System;
 
 public class GameViewCtrl
 {
@@ -22,10 +24,7 @@ public class GameViewCtrl
             onReset().Forget();
         }).AddTo(_view);
 
-        stage.EarthUnit.LifePoint.Subscribe(x =>
-        {
-            _view.UpdateHp(x);
-        }).AddTo(_view);
+        stage.EarthUnit.LifePoint.SubscribeAwait(OnHpChangedHandler).AddTo(_view);
 
         foreach (var shooter in stage.Shooters)
         {
@@ -41,6 +40,22 @@ public class GameViewCtrl
             ).AddTo(_view);
         }
     }
+
+    private async ValueTask OnHpChangedHandler(int x, CancellationToken token)
+    {
+        if(x > 0)
+        {
+            _view.UpdateHp(x);
+        }
+        else
+        {
+            await MySceneManager.Instance.LoadSceneAsync("Title");
+            TitleManager.Instance.GameOver();
+            //now that you've loaded, show the gameover view.
+
+        }
+    }
+
 
     async UniTaskVoid onReset()
     {

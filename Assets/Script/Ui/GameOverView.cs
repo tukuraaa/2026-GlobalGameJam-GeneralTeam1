@@ -14,6 +14,7 @@ public class GameOverView : MonoBehaviour
     [SerializeField]
     Button quitButton;
 
+    // public Observable<int> OnGameOver = new Observable<int>()
     public Observable<Unit> OnRestart => restartButton.OnClickAsObservable();
     public Observable<Unit> OnQuit => quitButton.OnClickAsObservable();
 

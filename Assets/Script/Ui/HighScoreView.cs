@@ -28,10 +28,18 @@ public class HighScoreView : MonoBehaviour
     void Start()
     {
         highScores = HighScoresObject.LoadHighScore();
-        Debug.Log($"number of high scores: {highScores.highScores.Count}");
-        foreach (SingleHighScore highscore in highScores.highScores)
+        if(highScores != null)
         {
-            Debug.Log(highscore);
+            Debug.Log($"number of high scores: {highScores.highScores.Count}");
+            foreach (SingleHighScore highscore in highScores.highScores)
+            {
+                Debug.Log(highscore);
+            }
         }
+        else
+        {
+            Debug.Log($"やば。");
+        }
+        
     }
 }
