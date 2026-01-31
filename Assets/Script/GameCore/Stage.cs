@@ -20,11 +20,11 @@ public class Stage : Singleton<Stage>
                     if(hitMsg.HitObj.gameObject.GetInstanceID() == EarthUnit.gameObject.GetInstanceID())
                     {
                         EarthUnit.LifePoint.Value -= hitMsg.DamageObj.BaseDamagePoint;
-                        Debug.Log($"EarthUnit Hit! Remaining LifePoint: {EarthUnit.LifePoint.Value}");
+                        // Debug.Log($"EarthUnit Hit! Remaining LifePoint: {EarthUnit.LifePoint.Value}");
                     }
                     else if(hitMsg.HitObj.gameObject.GetInstanceID() == Player.gameObject.GetInstanceID())
                     {
-                        Debug.Log("Player Hit");
+                        // Debug.Log("Player Hit");
                     }
                 }
             ).AddTo(this);

@@ -12,11 +12,17 @@ public class GameOverView : MonoBehaviour
     Button restartButton;
 
     [SerializeField]
+    Button returnToMenuButton;
+
+    [SerializeField]
     Button quitButton;
     
 
     // public Observable<int> OnGameOver = new Observable<int>()
     public Observable<Unit> OnRestart => restartButton.OnClickAsObservable();
+
+    public Observable<Unit> OnReturnToMenu => returnToMenuButton.OnClickAsObservable();
+
     public Observable<Unit> OnQuit => quitButton.OnClickAsObservable();
 
     void OnValidate()
@@ -29,6 +35,11 @@ public class GameOverView : MonoBehaviour
         {
             restartButton = transform.Find("RestartButton").GetComponent<Button>();
         }
+        if(returnToMenuButton == null)
+        {
+            returnToMenuButton = transform.Find("ReturnToMenuButton").GetComponent<Button>();
+        }
+
         if(quitButton == null)
         {
             quitButton = transform.Find("QuitButton").GetComponent<Button>();

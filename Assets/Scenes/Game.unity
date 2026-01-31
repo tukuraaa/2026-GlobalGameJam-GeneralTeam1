@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: orthographic size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4358933033248498039, guid: d12a1e18e0d9fb44aa9dab7487291aa2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4854429666732702454, guid: d12a1e18e0d9fb44aa9dab7487291aa2, type: 3}
       propertyPath: m_Name
       value: camObj
@@ -191,8 +195,16 @@ PrefabInstance:
       propertyPath: orthographic size
       value: 5.8
       objectReference: {fileID: 0}
+    - target: {fileID: 6146063831455300093, guid: d12a1e18e0d9fb44aa9dab7487291aa2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6153133517699817562, guid: d12a1e18e0d9fb44aa9dab7487291aa2, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6915899245798186843, guid: d12a1e18e0d9fb44aa9dab7487291aa2, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7921935649314102022, guid: d12a1e18e0d9fb44aa9dab7487291aa2, type: 3}
@@ -424,6 +436,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectRotation
   rotationSpeed: {x: 0, y: 50, z: 0}
+--- !u!114 &851798740 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5114279458174929302, guid: 1a7cb66dc5a74594f85cfecfc6852c14, type: 3}
+  m_PrefabInstance: {fileID: 5591410270072531531}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851798733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+--- !u!114 &851798745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851798733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a63e35ac89d1a45caa18d6a0084df78b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPower
+  fullDuration: 5
+  powerType: 0
+  playerInput: {fileID: 851798740}
+  usePowerInputAction:
+    m_Name: Use Power Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 0c1c7f6a-178e-4ea3-b28d-e1ea99917913
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 2bdb6644-c6d0-4485-88da-8254d97061bd
+      m_Path: <Gamepad>/leftShoulder
+      m_Interactions: Hold
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 6d828593-fc15-48bf-870e-2edeaf9b149c
+      m_Path: <Keyboard>/w
+      m_Interactions: Hold
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &929480671
 GameObject:
   m_ObjectHideFlags: 0
@@ -1255,6 +1318,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2915793171239070598, guid: 1a7cb66dc5a74594f85cfecfc6852c14, type: 3}
       insertIndex: -1
       addedObject: {fileID: 851798739}
+    - targetCorrespondingSourceObject: {fileID: 2915793171239070598, guid: 1a7cb66dc5a74594f85cfecfc6852c14, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 851798745}
   m_SourcePrefab: {fileID: 100100000, guid: 1a7cb66dc5a74594f85cfecfc6852c14, type: 3}
 --- !u!1001 &5999949780491368520
 PrefabInstance:
@@ -1264,21 +1330,53 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 126966861}
     m_Modifications:
-    - target: {fileID: 874339432622528482, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+    - target: {fileID: 1043848477872611387, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1043848477872611387, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1043848477872611387, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -24.599976
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1043848477872611387, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2504947716070491658, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
       propertyPath: m_Name
       value: InGameView
       objectReference: {fileID: 0}
-    - target: {fileID: 3502073475065500638, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -25
+    - target: {fileID: 5101762344702084040, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4060641176083523924, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
-      propertyPath: m_text
-      value: HP:3
+    - target: {fileID: 5101762344702084040, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101762344702084040, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101762344702084040, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347355205410134138, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347355205410134138, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347355205410134138, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9127958035951398493, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
       propertyPath: m_Pivot.x
@@ -1468,7 +1566,61 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8763340661703558685, guid: 897f96ba766871e4497685ffd0f2557a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1791730900531519740}
+    - targetCorrespondingSourceObject: {fileID: 8763340661703558685, guid: 897f96ba766871e4497685ffd0f2557a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8585241378735666740}
   m_SourcePrefab: {fileID: 100100000, guid: 897f96ba766871e4497685ffd0f2557a, type: 3}
+--- !u!114 &8585241378735666739 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2369853030728831220, guid: 897f96ba766871e4497685ffd0f2557a, type: 3}
+  m_PrefabInstance: {fileID: 8585241378735666738}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577784731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+--- !u!114 &8585241378735666740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577784731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a63e35ac89d1a45caa18d6a0084df78b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPower
+  fullDuration: 5
+  powerType: 0
+  playerInput: {fileID: 8585241378735666739}
+  usePowerInputAction:
+    m_Name: Use Power Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 9f82f667-e8b2-404b-91a9-02a924e88aa5
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 77e6eefb-98f9-439e-8f74-6a3cf1f7b648
+      m_Path: <Gamepad>/rightShoulder
+      m_Interactions: Hold
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 80139a41-bc3d-45cd-b643-72d6850522c0
+      m_Path: <Keyboard>/upArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

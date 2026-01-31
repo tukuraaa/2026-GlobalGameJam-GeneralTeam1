@@ -40,16 +40,6 @@ public class TitleManager : Singleton<TitleManager>
         gameOverView.gameObject.SetActive(false);
     }
 
-    public async Task AsyncBackToMainMenu()
-    {
-        Debug.Log("HOEH.");
-        titleView.gameObject.SetActive(true);
-        gameOverView.gameObject.SetActive(false);
-        await UniTask.NextFrame();
-        highScoreView.gameObject.SetActive(false);
-
-    }
-
     public void ShowHighScore()
     {
         titleView.gameObject.SetActive(false);

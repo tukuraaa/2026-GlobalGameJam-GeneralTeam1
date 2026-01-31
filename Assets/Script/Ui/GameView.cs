@@ -2,17 +2,21 @@ using System;
 using R3;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameView : MonoBehaviour
 {
-    [SerializeField]
-    TextMeshProUGUI _txtHitTimes;
+    
     [SerializeField]
     TextMeshProUGUI _txtHp;
 
     [SerializeField]
-    TextMeshProUGUI _txtScore;
+    TextMeshProUGUI playerOneScoreText;
+
+    [SerializeField]
+    [FormerlySerializedAs("_txtHitTimes")]
+    TextMeshProUGUI playerTwoScoreText;
 
     [SerializeField]
     Button _resetButton;
@@ -46,7 +50,7 @@ public class GameView : MonoBehaviour
 
     public void UpdateTimes(int times)
     {
-        _txtHitTimes.text = $@"HitTimes : {times}";
+        playerTwoScoreText.text = $@"HitTimes : {times}";
     }
 
     public void UpdateHp(int hp)
@@ -56,7 +60,7 @@ public class GameView : MonoBehaviour
 
     public void UpdateScore(int score)
     {
-        _txtScore.text = $@"Score : {score}";
+        playerOneScoreText.text = $@"Score : {score}";
         
     }
 }
