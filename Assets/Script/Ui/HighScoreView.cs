@@ -1,4 +1,5 @@
 using R3;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,9 @@ public class HighScoreView : MonoBehaviour
     
     [SerializeField]
     Button mainMenuButton;
+
+
+
     private HighScoresObject highScores;
 
     public Observable<Unit> OnMainMenu => mainMenuButton.OnClickAsObservable();
@@ -45,4 +49,5 @@ public class HighScoreView : MonoBehaviour
         }
         new HighScoreViewCtrl(this);
     }
+
 }

@@ -189,6 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameView
   _txtHitTimes: {fileID: 288683412996086831}
   _txtHp: {fileID: 4060641176083523924}
+  _txtScore: {fileID: 3131655707505291345}
   _resetButton: {fileID: 2412130856613312659}
 --- !u!1 &3190973717837702425
 GameObject:

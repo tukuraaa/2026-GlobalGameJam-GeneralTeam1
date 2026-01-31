@@ -2,7 +2,8 @@ using R3;
 using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;
 using System.Threading;
-using System;
+using ObservableCollections;
+using UnityEngine;
 
 public class GameViewCtrl
 {
@@ -50,7 +51,7 @@ public class GameViewCtrl
         else
         {
             await MySceneManager.Instance.LoadSceneAsync("Title");
-            TitleManager.Instance.GameOver();
+            TitleManager.Instance.GameOver(Mathf.RoundToInt(_view.TimeInGame));
             //now that you've loaded, show the gameover view.
 
         }

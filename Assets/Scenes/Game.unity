@@ -1146,21 +1146,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 126966861}
     m_Modifications:
-    - target: {fileID: 874339432622528482, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -24.599976
-      objectReference: {fileID: 0}
     - target: {fileID: 2504947716070491658, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
       propertyPath: m_Name
       value: InGameView
-      objectReference: {fileID: 0}
-    - target: {fileID: 3502073475065500638, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4060641176083523924, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
-      propertyPath: m_text
-      value: HP:3
       objectReference: {fileID: 0}
     - target: {fileID: 9127958035951398493, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
       propertyPath: m_Pivot.x

@@ -13,6 +13,7 @@ public class GameOverView : MonoBehaviour
 
     [SerializeField]
     Button quitButton;
+    
 
     // public Observable<int> OnGameOver = new Observable<int>()
     public Observable<Unit> OnRestart => restartButton.OnClickAsObservable();
@@ -37,5 +38,12 @@ public class GameOverView : MonoBehaviour
     void Start()
     {
         new GameOverViewCtrl(this);
+    }
+
+
+    public void UpdateScore()
+    {
+        scoreText.text = $"Score: {PlayerPrefs.GetInt("Score")}";
+        PlayerPrefs.DeleteKey("Score"); //reset
     }
 }

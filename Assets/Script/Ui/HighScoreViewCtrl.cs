@@ -17,5 +17,6 @@ public class HighScoreViewCtrl
         {
             TitleManager.Instance.BackToMainMenu();
         }).AddTo(_view);
+
     }    
 }

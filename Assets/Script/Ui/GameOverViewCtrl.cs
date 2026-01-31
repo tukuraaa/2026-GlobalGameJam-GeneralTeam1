@@ -23,6 +23,8 @@ public class GameOverViewCtrl
             //for now, quit.
             await MySceneManager.Instance.QuitGame();
         }).AddTo(_view);
+        
+        _view.UpdateScore();
 
     }    
 }
