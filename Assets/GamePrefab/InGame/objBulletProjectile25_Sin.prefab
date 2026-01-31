@@ -124,10 +124,10 @@ GameObject:
   - component: {fileID: 3376325032910865316}
   - component: {fileID: 7592595348179971094}
   - component: {fileID: 3974780749404170560}
-  - component: {fileID: 6459985082194080851}
   - component: {fileID: -3392575241846261652}
+  - component: {fileID: -2690456276489794026}
   m_Layer: 0
-  m_Name: objBulletProjectile25
+  m_Name: objBulletProjectile25_Sin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,19 +218,6 @@ MonoBehaviour:
   BaseDamagePoint: 1
   HitTimes: 1
   OwnerShooter: {fileID: 0}
---- !u!114 &6459985082194080851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5087218474414337439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07488eff00d04234dbebbe0aca26ec7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BaseMover
-  IsInit: 0
 --- !u!114 &-3392575241846261652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +230,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408a151292638f142aa53f6744fa3e75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayHitObj
+  Lifetime: 3
   hit: {fileID: 1714524745656972, guid: 1efdac5f1b28acd4997a0580dd7a9702, type: 3}
+--- !u!114 &-2690456276489794026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5087218474414337439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f85e516d9bf1724a8462edf96727d17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SinWaveMover
+  IsInit: 0
+  _sinSpeed: 30
 --- !u!1001 &7847658353986643952
 PrefabInstance:
   m_ObjectHideFlags: 0
