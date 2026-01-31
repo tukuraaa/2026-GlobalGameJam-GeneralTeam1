@@ -9,6 +9,7 @@ public class DamageObj : MonoBehaviour
     public int MaxTargets = -1; // -1 means unlimited
     public float ContinuousInterval = 0f; // Interval for continuous damage, 0 means no continuous damage
     public int BaseDamagePoint = 1;
+    public int BaseScorePoint = 0;
     public int HitTimes = 1;
 
     private bool _isFirstInitialize = true;
