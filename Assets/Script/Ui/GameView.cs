@@ -34,9 +34,9 @@ public class GameView : MonoBehaviour
         TimeInGame = 0f;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        TimeInGame += Time.deltaTime;
+        TimeInGame += (Time.fixedDeltaTime) * DataConst.ScoreRate(Stage.Instance.NowLevel.CurrentValue);
         if(Mathf.RoundToInt(TimeInGame) - lastSecond >= 1)
         {
             lastSecond += 1;
