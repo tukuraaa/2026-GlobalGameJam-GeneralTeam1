@@ -13,18 +13,8 @@ public class Player : MonoBehaviour
     public bool IsMoving = false;
     
     private float _currentAngle = 0f; // 現在の楕円上の角度パラメータ
-    InputSystem_Actions _gameInputs;
-    protected void Awake()
-    {
-        // Input Actionインスタンス生成
-        _gameInputs = new InputSystem_Actions();
-        // Actionイベント登録
-        _gameInputs.Player.Move.started += OnMove;
-        _gameInputs.Player.Move.performed += OnMove;
-        _gameInputs.Player.Move.canceled += OnMove;
-        // 有効化する必要がある
-        _gameInputs.Enable();           
-    }
+
+    private Vector2 moveInputValue;// 入力ベクトルを格納する変数
 
     void Update()
     {
@@ -51,9 +41,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnMove(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext context)
     {
-        var moveInputValue = context.ReadValue<Vector2>();
+        moveInputValue = context.ReadValue<Vector2>();
         HorizontalX = moveInputValue.x;
         VerticalY = moveInputValue.y;
         IsMoving = (Mathf.Abs(VerticalY) != 0 || Mathf.Abs(HorizontalX) != 0);
