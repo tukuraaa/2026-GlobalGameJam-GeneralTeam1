@@ -3,7 +3,15 @@ using R3;
 
 public class EarthUnit:Singleton<EarthUnit>
 {
-    public ReactiveProperty<int> LifePoint = new ReactiveProperty<int>(3);
+    [SerializeField]
+    int _initHp = 100;
+    public ReactiveProperty<int> LifePoint = new ReactiveProperty<int>(10);
+
+    override protected void Awake()
+    {
+        base.Awake();
+        LifePoint.Value = _initHp;       
+    }
 
     public Vector2 GetImpactPos()
     {

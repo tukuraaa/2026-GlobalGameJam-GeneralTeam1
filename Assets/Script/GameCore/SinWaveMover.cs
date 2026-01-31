@@ -4,9 +4,9 @@ public class SinWaveMover : BaseMover
 {
     Vector3 _linearPos;
     Vector3 _unitVec;
-    [SerializeField]
-    float _sinSpeed = 30f;
-    float _sinOffset = 10f;
+    //[SerializeField]
+    float _sinSpeed = 3f;
+    float _sinOffset = 1f;
     float _amp = 2f;
     float _ampOffset = 0.5f;
 
@@ -17,7 +17,7 @@ public class SinWaveMover : BaseMover
         _linearPos = transform.position;
         _unitVec = Vector3.Cross(targetPos - _linearPos, Vector3.forward).normalized;
         Debug.Log(_linearPos);
-        // U•‚Ìİ’è‚ğ‚±‚±‚Å‚·‚éH
+        // ï¿½Uï¿½ï¿½ï¿½Ìİ’ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½H
 
         _sinSpeed += Random.Range(-_sinOffset, _sinOffset);
         _amp += Random.Range(-_ampOffset, _ampOffset);

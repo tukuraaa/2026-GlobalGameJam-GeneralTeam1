@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public float HorizontalX = 0;
     public float VerticalY = 0;
     public bool IsMoving = false;
-    
+    [SerializeField]
     private float _currentAngle = 0f; // 現在の楕円上の角度パラメータ
 
     private Vector2 moveInputValue;// 入力ベクトルを格納する変数
