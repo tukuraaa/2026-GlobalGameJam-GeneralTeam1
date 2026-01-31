@@ -1,8 +1,7 @@
-using UnityEngine;
-using UnityEngine.Pool;
-using System.Collections;
 using Cysharp.Threading.Tasks;
 using R3;
+using UnityEngine;
+using UnityEngine.Pool;
 
 public class ShooterMsg
 {
@@ -12,13 +11,9 @@ public class ShooterMsg
 public class Shooter : MonoBehaviour
 {
     [SerializeField]
-    float _xRange = 3f;
-    [SerializeField]
-    float _yRange = 0;
-    [SerializeField]
     GameObject _bulletPrefab;
-    //todo: ObjectPool
-    //ObjectPool<GameObject> _bulletPool;
+    public ObjectPool<GameObject> BulletPool;
+
     [SerializeField]
     float _shootWaveInterval = 1f;
     [SerializeField]
@@ -26,8 +21,9 @@ public class Shooter : MonoBehaviour
     [SerializeField]
     int _shootWaveCount = 3;
     [SerializeField]
-    float _bulletSpeed = 5f;
-    Vector3 _targetPosition;
+    float _arrivalTime = 5f;
+    [SerializeField]
+    float _height = 2f;
 
     Subject<ShooterMsg> _hitSubject = new Subject<ShooterMsg>();
     public Observable<ShooterMsg> OnHit() => _hitSubject.AsObservable();
@@ -36,6 +32,28 @@ public class Shooter : MonoBehaviour
 
     void Start()
     {
+        BulletPool = new ObjectPool<GameObject>(
+            createFunc: () =>
+            {
+                var bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+                return bullet;
+            },
+            actionOnGet: (obj) =>
+            {
+                obj.SetActive(true);
+            },
+            actionOnRelease: (obj) =>
+            {
+                obj.SetActive(false);
+                obj.GetComponent<BaseMover>().IsInit = false;
+            },
+            actionOnDestroy: (obj) =>
+            {
+                // destroy
+            },
+            defaultCapacity: 10, //仮
+            maxSize: 100 // 仮
+        );
         StartShooting();
     }
 
@@ -66,20 +84,16 @@ public class Shooter : MonoBehaviour
     {
         for (int i = 0; i < _shootWaveCount; i++)
         {
-            //発射位置
-            Vector3 randomOffset = new Vector3(
-                Random.Range(-_xRange, _xRange),
-                Random.Range(-_yRange, _yRange),
-                0
-            );
-            Vector3 shootPosition = transform.position + randomOffset;
-            
-            // ターゲット位置と方向
-            _targetPosition = Stage.Instance.EarthUnit.transform.position;
-            Vector3 direction = (_targetPosition - shootPosition).normalized;
-            
+            // 落下地点
+            // xy基準かxz基準かをshooterごとに設定する処理が必要になる
+            Vector3 targetPosition = Stage.Instance.EarthUnit.GetImpactPos();
+
+            // 発射地点
+            Vector3 vec = Stage.Instance.EarthUnit.transform.position - targetPosition;
+            Vector3 shootPosition = vec * _height;
+
             // 弾の発射
-            ShootBullet(shootPosition, direction);
+            ShootBullet(shootPosition, targetPosition);
             
             // 単発の間隔時間を待つ
             if (i < _shootWaveCount - 1)
@@ -89,24 +103,22 @@ public class Shooter : MonoBehaviour
         }
     }
 
-    protected void ShootBullet(Vector3 position, Vector3 direction)
+    protected void ShootBullet(Vector3 shootPosition, Vector3 targetPosition)
     {
-        if (_bulletPrefab != null)
-        {
-            GameObject bullet = Instantiate(_bulletPrefab, position, transform.rotation);
-            var mover = bullet.GetComponent<BaseMover>();
-            if (mover != null)
-            {
-                mover.MoveDirection = direction;
-                mover.MoveSpeed = _bulletSpeed;
-            }
+        var bullet = BulletPool.Get();
+        bullet.transform.position = shootPosition;
 
-            var damageObj = bullet.GetComponent<DamageObj>();
-            if (damageObj != null)
-            {
-                damageObj.OwnerShooter = this;
-                damageObj.Lifetime.Value = 5f; // 弾の寿命を設定
-            }
+        var damageObj = bullet.GetComponent<DamageObj>();
+        if (damageObj != null)
+        {
+            damageObj.OwnerShooter = this;
+            damageObj.Lifetime.Value = _arrivalTime + 1f; // 弾の寿命を設定 （+1はバッファ）
+        }
+
+        var mover = bullet.GetComponent<BaseMover>();
+        if (mover != null)
+        {
+            mover.Initialize(_arrivalTime, targetPosition);
         }
     }
 

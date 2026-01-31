@@ -11,19 +11,19 @@ public class DamageObj : MonoBehaviour
     public int BaseDamagePoint = 1;
     public int HitTimes = 1;
 
-    public Shooter OwnerShooter;    
+    public Shooter OwnerShooter;
 
     void Awake()
     {
         Lifetime.Subscribe((value)=>
         {
-            if(Lifetime.Value > 0)
-                Destroy(this.gameObject, Lifetime.Value);
+            if (Lifetime.Value > 0)
+                OwnerShooter.BulletPool.Release(this.gameObject);
         }).AddTo(this);
     }
     void OnTriggerEnter(Collider other)
     {
         this.gameObject.SetActive(false);
         OwnerShooter?.OnDamageObjHit(this, other);        
-    }    
+    }
 }
