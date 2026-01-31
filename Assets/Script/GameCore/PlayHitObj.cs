@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class PlayHitObj : MonoBehaviour
 {
-    public float Lifetime = 3f;
     public GameObject hit = null;
 
     public event Action OnHitPlayer;
-
-    void Awake()
-    {
-        if (Lifetime > 0)
-            Destroy(this.gameObject, Lifetime);
-    }
     
     void  OnTriggerEnter(Collider other)
     {        
