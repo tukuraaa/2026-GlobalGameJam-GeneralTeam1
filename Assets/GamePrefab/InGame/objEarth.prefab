@@ -52,6 +52,7 @@ MonoBehaviour:
   _barrierMat: {fileID: 2100000, guid: fca3f84099f7f5c40bf94136e73cf539, type: 2}
   _initHp: 50
   _deadSound: {fileID: 8300000, guid: 49abc8ce1a89c3149a9b50806e4a23aa, type: 3}
+  _barrierShowSound: {fileID: 8300000, guid: 7d11589c313d6a64f9ab0ffc270f9f9d, type: 3}
 --- !u!135 &7743548458040797572
 SphereCollider:
   m_ObjectHideFlags: 0

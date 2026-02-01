@@ -8,6 +8,7 @@ public class Stage : Singleton<Stage>
 {
     public EarthUnit EarthUnit;
     public List<Shooter> Shooters;
+    public ItemShooter itemShooter;
     int _maxLevel = DataConst.MaxLevel;
     public ReadOnlyReactiveProperty<int> NowLevel => _nowLevel.ToReadOnlyReactiveProperty();
     ReactiveProperty<int> _nowLevel = new(1);
@@ -33,6 +34,14 @@ public class Stage : Singleton<Stage>
                 }
             ).AddTo(this);
         }
+
+        itemShooter?.OnHit().Subscribe(
+            (hitMsg) =>
+            {
+                Debug.Log("ItemShooter Hit");
+                DoHitReaction(hitMsg);
+            }
+        ).AddTo(this);
 
         AudioManager.Instance.PlayBgm(_bgm);
     }

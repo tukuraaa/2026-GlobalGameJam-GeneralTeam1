@@ -388,6 +388,7 @@ MonoBehaviour:
   _startButton: {fileID: 7122101257205616019}
   _highScoreButton: {fileID: 3474793469062563495}
   _quitButton: {fileID: 9210187797224530716}
+  _titleBgm: {fileID: 8300000, guid: a939ff1e6bba44d4bb321864a613954d, type: 3}
 --- !u!1 &5705542204155402513
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,12 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
+    public void StopBgm()
+    {
+        _bgmSource.Stop();
+    }
+
+
     public void PlayOneShotSe(AudioClip clip)
     {
         if(clip != null)

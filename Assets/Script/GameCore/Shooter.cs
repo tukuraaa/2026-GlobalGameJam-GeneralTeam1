@@ -58,13 +58,19 @@ public class Shooter : MonoBehaviour
 
         Stage.Instance.NowLevel.Subscribe((level) =>
         {
-            // レベルに応じてパラメータを変更
-            _arrivalTime = DataConst.ShooterArriveTime(level);
-            _shootWaveCount = DataConst.ShootWaveCount(level);
-            _shootWaveInterval = DataConst.ShootWaveInterval(level);
+            changeLevel(level);
         }).AddTo(this);
         
         StartShooting();
+    }
+
+    protected virtual void changeLevel(int level)
+    {
+        // Override in derived classes if needed
+        // レベルに応じてパラメータを変更
+        _arrivalTime = DataConst.ShooterArriveTime(level);
+        _shootWaveCount = DataConst.ShootWaveCount(level);
+        _shootWaveInterval = DataConst.ShootWaveInterval(level);        
     }
 
     public void StartShooting()

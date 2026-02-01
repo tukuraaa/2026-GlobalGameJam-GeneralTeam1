@@ -67,6 +67,12 @@ public class GameOverView : MonoBehaviour
         PlayerPrefs.DeleteKey("Score"); //reset
         nameInput.text = "";
     }
+
+    void OnEnable()
+    {
+        AudioManager.Instance.StopBgm();
+    }
+
     public void UpdateScore()
     {
         scoreText.text = $"Score: 0{PlayerPrefs.GetInt("Score")}00";

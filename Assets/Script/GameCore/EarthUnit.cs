@@ -11,7 +11,7 @@ public class EarthUnit : MonoBehaviour
     [SerializeField]
     GameObject _barrierObj;
     [SerializeField]
-    GameObject _barrierActBulletObj;
+    GameObject _barrierActBulletObj;    
     [SerializeField]
     Material _barrierMat;
     float _barrierLeftTime = 0f;
@@ -23,6 +23,8 @@ public class EarthUnit : MonoBehaviour
     public ReactiveProperty<int> LifePoint = new ReactiveProperty<int>(10);
     [SerializeField]
     AudioClip _deadSound;
+    [SerializeField]
+    AudioClip _barrierShowSound;    
     List<BarrierSkillData> _barrierSkill = new ();
 
     protected void Awake()
@@ -81,6 +83,7 @@ public class EarthUnit : MonoBehaviour
         await UniTask.WaitUntil(() => isHit);
         Destroy(barrierActObj);
 
+        AudioManager.Instance.PlayOneShotSe(_barrierShowSound);
         barrier.Init(DataConst.BarrierTime);
         
         //バリア表現

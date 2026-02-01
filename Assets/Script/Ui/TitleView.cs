@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class TitleView : MonoBehaviour
 
     [SerializeField]
     Button _quitButton;
+    [SerializeField]
+    AudioClip _titleBgm = null;
     public Observable<Unit> OnStart => _startButton.OnClickAsObservable();
     public Observable<Unit> OnHighScore => _highScoreButton.OnClickAsObservable();
     public Observable<Unit> OnQuit => _quitButton.OnClickAsObservable();
@@ -36,5 +39,7 @@ public class TitleView : MonoBehaviour
     void Start ()
     {
         new TitleViewCtrl(this);
+
+        AudioManager.Instance.PlayBgm(_titleBgm);
     }
 }

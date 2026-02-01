@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -7,7 +8,21 @@ public class ItemShooter : Shooter
 
     protected override void Start()
     {
+        doStart().Forget();
+    }
+
+    async UniTaskVoid doStart()
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(5));
         StartShooting();
+    }
+
+    override protected void changeLevel(int level)
+    {
+        // // ãƒ¬ãƒ™ãƒ«ã«å¿œã˜ã¦ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’å¤‰æ›´
+        // _arrivalTime = DataConst.ShooterArriveTime(level);
+        // _shootWaveCount = DataConst.ShootWaveCount(level);
+        // _shootWaveInterval = DataConst.ShootWaveInterval(level);        
     }
 
     protected override async UniTask Shooting()
@@ -22,7 +37,7 @@ public class ItemShooter : Shooter
     {
         while (_item != null && _item.activeSelf)
         {
-            // ƒAƒCƒeƒ€‚ªÁ‚¦‚é‚Ü‚Å‘Ò‹@
+            // ã‚¢ã‚¤ãƒ†ãƒ ãŒæ¶ˆãˆã‚‹ã¾ã§å¾…æ©Ÿ
             await UniTask.Delay((int)(Time.deltaTime * 1000));
         }
 
@@ -43,13 +58,13 @@ public class ItemShooter : Shooter
         var damageObj = _item.GetComponent<DamageObj>();
         if (damageObj != null)
         {
-            damageObj.Initialize(this, -1f); // -1 ’e‚ğ•s€‚Åİ’è
+            damageObj.Initialize(this, -1f); // -1 å¼¾ã‚’ä¸æ­»ã§è¨­å®š
         }
 
         var mover = _item.GetComponent<BaseMover>();
         if (mover != null)
         {
-            mover.Initialize(_arrivalTime, transform.position); // transform.position ‰¼
+            mover.Initialize(_arrivalTime, transform.position); // transform.position ä»®
         }
 
         var psList = _item.GetComponentsInChildren<ParticleSystem>(true);
