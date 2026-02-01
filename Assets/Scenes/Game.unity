@@ -940,22 +940,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: objPlayer2
       objectReference: {fileID: 0}
-    - target: {fileID: 4451441881122885074, guid: 1a7cb66dc5a74594f85cfecfc6852c14, type: 3}
-      propertyPath: _speed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4451441881122885074, guid: 1a7cb66dc5a74594f85cfecfc6852c14, type: 3}
-      propertyPath: _velocitySpeed
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4451441881122885074, guid: 1a7cb66dc5a74594f85cfecfc6852c14, type: 3}
-      propertyPath: _accelerationTime
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4451441881122885074, guid: 1a7cb66dc5a74594f85cfecfc6852c14, type: 3}
-      propertyPath: _onEnter.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6545585456281176297, guid: 1a7cb66dc5a74594f85cfecfc6852c14, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.5
