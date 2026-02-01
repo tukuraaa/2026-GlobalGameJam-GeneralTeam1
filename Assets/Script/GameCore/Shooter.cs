@@ -11,26 +11,26 @@ public class ShooterMsg
 public class Shooter : MonoBehaviour
 {
     [SerializeField]
-    GameObject _bulletPrefab;
+    protected GameObject _bulletPrefab;
     public ObjectPool<GameObject> BulletPool;
 
     [SerializeField]
     float _shootWaveInterval = 1f;
     [SerializeField]
-    float _shootInterval = 0.1f;
+    protected float _shootInterval = 0.1f;
     [SerializeField]
     int _shootWaveCount = 3;
     [SerializeField]
-    float _arrivalTime = 5f;
+    protected float _arrivalTime = 5f;
     [SerializeField]
     float _height = 2f;
 
     Subject<ShooterMsg> _hitSubject = new Subject<ShooterMsg>();
     public Observable<ShooterMsg> OnHit() => _hitSubject.AsObservable();
     
-    private bool _isShooting = false;
+    protected bool _isShooting = false;
 
-    void Start()
+    protected virtual void Start()
     {
         BulletPool = new ObjectPool<GameObject>(
             createFunc: () =>
@@ -71,7 +71,7 @@ public class Shooter : MonoBehaviour
         _isShooting = false;
     }
 
-    protected async UniTask Shooting()
+    protected virtual async UniTask Shooting()
     {
         while (_isShooting)
         {
@@ -127,7 +127,7 @@ public class Shooter : MonoBehaviour
         }
     }
 
-    async UniTaskVoid resetPs(ParticleSystem ps)
+    protected async UniTaskVoid resetPs(ParticleSystem ps)
     {
         ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         ps.Clear(true);

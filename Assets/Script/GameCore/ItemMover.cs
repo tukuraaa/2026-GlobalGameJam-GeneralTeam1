@@ -9,10 +9,9 @@ public class ItemMover : BaseMover
     {
         base.Initialize(arrivalTime, _);
         var cam = Camera.main;
-        _bottomLeft = cam.ViewportToWorldPoint(new Vector3(0, 0, cam.nearClipPlane));
-        Debug.LogWarning(_bottomLeft);
-        _topRight = cam.ViewportToWorldPoint(new Vector3(1, 1, cam.nearClipPlane));
-        Debug.LogWarning(_topRight);
+        var distanceZ = Stage.Instance.EarthUnit.transform.position.z - cam.transform.position.z; // ÉJÉÅÉâÇ∆ínãÖÇÃZé≤ãóó£
+        _bottomLeft = cam.ViewportToWorldPoint(new Vector3(0, 0, distanceZ));
+        _topRight = cam.ViewportToWorldPoint(new Vector3(1, 1, distanceZ));
 
         SetNewTargetPosition();
     }
@@ -26,15 +25,28 @@ public class ItemMover : BaseMover
 
         if (transform.position == _targetPos)
         {
+            _currentTime = 0;
             SetNewTargetPosition();
         }
     }
 
     void SetNewTargetPosition()
     {
-        _targetPos = new Vector3(Random.Range(_bottomLeft.x, _topRight.x),
-                                 Random.Range(_bottomLeft.y, _topRight.y),
-                                 0);
-        Debug.Log(_targetPos);
+        if (_targetPos.x == _bottomLeft.x)
+        {
+            _targetPos = new Vector3(_topRight.x, Random.Range(_bottomLeft.y, _topRight.y), 0);
+        }
+        else if (_targetPos.x == _topRight.x)
+        {
+            _targetPos = new Vector3(_bottomLeft.x, Random.Range(_bottomLeft.y, _topRight.y), 0);
+        }
+        else if(_targetPos.y == _bottomLeft.y)
+        {
+            _targetPos = new Vector3(Random.Range(_bottomLeft.x, _topRight.x), _topRight.y, 0);
+        }
+        else
+        {
+            _targetPos = new Vector3(Random.Range(_bottomLeft.x, _topRight.x), _bottomLeft.y, 0);
+        }
     }
 }

@@ -16,7 +16,6 @@ public class SinWaveMover : BaseMover
 
         _linearPos = transform.position;
         _unitVec = Vector3.Cross(targetPos - _linearPos, Vector3.forward).normalized;
-        Debug.Log(_linearPos);
         // U•‚Ìİ’è‚ğ‚±‚±‚Å‚·‚éH
 
         _sinSpeed += Random.Range(-_sinOffset, _sinOffset);
