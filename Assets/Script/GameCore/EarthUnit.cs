@@ -2,12 +2,18 @@ using UnityEngine;
 using R3;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
+using R3.Triggers;
 
 public class EarthUnit : MonoBehaviour
 {
     //barrier表現
     [SerializeField]
     GameObject _barrierObj;
+    [SerializeField]
+    GameObject _barrierActBulletObj;
+    [SerializeField]
+    Material _barrierMat;
     float _barrierLeftTime = 0f;
     HashSet<int> _skillID = new HashSet<int>() {1, 2};
     //
@@ -31,13 +37,45 @@ public class EarthUnit : MonoBehaviour
 
         var barrier = _barrierSkill.FirstOrDefault(b => b.SkillId == id);
         if(barrier == null) return;
+
+
+        var barrierActObj = Instantiate(
+            _barrierActBulletObj,
+            player.transform.position,
+            Quaternion.identity
+        );
+
+        _skillID.Remove(id);
+
+        doBarrierEffect(barrierActObj, barrier).Forget();
+    }
+
+    async UniTaskVoid doBarrierEffect(GameObject barrierActObj, BarrierSkillData barrier)
+    {
+        const float moveTime = 2f;
+        barrierActObj.GetComponent<BaseMover>().Initialize(
+            moveTime,
+            this.transform.position            
+        );
+
+        bool isHit = false;
+        barrierActObj.OnTriggerEnterAsObservable()
+            .Subscribe((other) =>
+            {
+                if(other.gameObject.GetInstanceID() == this.gameObject.GetInstanceID())
+                {
+                    isHit = true;
+                }
+            }).AddTo(barrierActObj);
+
+        await UniTask.WaitUntil(() => isHit);
+        Destroy(barrierActObj);
+
         barrier.Init(DataConst.BarrierTime);
         
         //バリア表現
         _barrierObj.SetActive(true);
-        _barrierLeftTime = DataConst.BarrierTime;
-
-        _skillID.Remove(id);
+        _barrierLeftTime = DataConst.BarrierTime;        
     }
 
     public Vector2 GetImpactPos()
@@ -80,6 +118,8 @@ public class EarthUnit : MonoBehaviour
         if(_barrierLeftTime > 0)
         {
             _barrierLeftTime -= Time.deltaTime;
+
+            _barrierMat.SetFloat("_barrier_level", (DataConst.BarrierTime - _barrierLeftTime) / (DataConst.BarrierTime * 0.25f));
         }
         if(IsBarrierActive() == false)
         {
