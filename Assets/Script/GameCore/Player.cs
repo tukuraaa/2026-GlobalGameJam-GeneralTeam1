@@ -70,16 +70,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _limitSpeed = 15f;
     /// <summary>
-    /// ピッチボリュームの変数
-    /// </summary>
-    [SerializeField]
-    private float pitchVolume = 1.2f;
-    /// <summary>
-    /// ピッチのデフォルト値の変数
-    /// </summary>
-    [SerializeField]
-    private float defaultPitch = 1.0f;
-    /// <summary>
     /// プレイヤー同士の距離制限の変数
     /// </summary>
     [SerializeField]
@@ -147,19 +137,6 @@ public class Player : MonoBehaviour
     /// プレイヤー接触時のイベントのプロパティ
     /// </summary>
     public UnityEvent _OnEnter { get => _onEnter; set => _onEnter = value; }
-
-    /// <summary>
-    /// プレイヤーのオーディオソースの変数
-    /// </summary>
-    private AudioSource _audioSource = null;
-
-    /// <summary>
-    /// 初期設定を行う関数
-    /// </summary>
-    private void Start()
-    {
-        _audioSource = GetComponent<AudioSource>();
-    }
 
     /// <summary>
     /// プレイヤーの位置を楕円軌道上に更新する関数
@@ -277,11 +254,8 @@ public class Player : MonoBehaviour
     /// <returns></returns>
     private IEnumerator OnStop()
     {
-        _audioSource.Stop();// 移動音を停止
-
-        // 衝突音を再生（ピッチを上げる）
-        _audioSource.pitch = pitchVolume;
-        _audioSource.PlayOneShot(_hitSound);
+        AudioManager.Instance.ChangePitch();// ピッチを変更
+        AudioManager.Instance.PlayOneShotSE(_hitSound);// 衝突音を再生
 
         // プレイヤーが変な方向に移動しないように入力値をリセット
         _horizontalX = 0;
@@ -295,6 +269,7 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSeconds(_waitTime);// 少し待機してから
         _isStopON = true;// 停止フラグを再度ONに設定
+        AudioManager.Instance.ResetPitch();// ピッチをリセット
     }
 
     /// <summary>
@@ -311,15 +286,12 @@ public class Player : MonoBehaviour
             _verticalY = _moveInputValue.y;// 垂直方向の入力値を設定
             _isMoving = (Mathf.Abs(_verticalY) != 0 || Mathf.Abs(_horizontalX) != 0);// 移動状態を更新
             _accelerationTime++;// 加速時間をインクリメント
-
-            // 移動音を再生（ピッチを元に戻す）
-            _audioSource.pitch = defaultPitch;
-            _audioSource.PlayOneShot(_moveSound);
+            AudioManager.Instance.PlayOneShotSe(_moveSound);// 移動音を再生
 
             // 移動していない場合
             if (!_isMoving)
             {
-                _audioSource.Stop();
+                AudioManager.Instance.StopSe();// 移動音を停止
                 _accelerationTime = 0;// 加速時間をリセット
                 _speed = _initialSpeed;// 速度を初期値にリセット
             }

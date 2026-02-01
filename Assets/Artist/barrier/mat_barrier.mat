@@ -129,7 +129,7 @@ Material:
     - _XRMotionVectorsPass: 1
     - _ZWrite: 0
     - _backface_intensity: 0.1
-    - _barrier_level: 1
+    - _barrier_level: 4.0061927
     - _intensity: 5.5
     m_Colors:
     - _BaseColor: {r: 0.20943397, g: 0.8419665, b: 1, a: 1}

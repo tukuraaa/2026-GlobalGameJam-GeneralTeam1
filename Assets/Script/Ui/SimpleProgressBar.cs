@@ -26,7 +26,7 @@ public class SimpleProgressBar : MonoBehaviour
     
 
     public ReactiveProperty<float> currentValue;
-    private bool _isInitialized = false; 
+    //private bool _isInitialized = false;
 
 
     void OnValidate()
@@ -53,7 +53,7 @@ public class SimpleProgressBar : MonoBehaviour
     public void Init(float max)
     {
         maxValue = max;
-        _isInitialized = true;
+        //_isInitialized = true;
     }
 
     private void ValueChangeHandler(float value)
