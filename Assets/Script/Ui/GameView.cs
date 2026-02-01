@@ -1,12 +1,7 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using R3;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameView : MonoBehaviour
@@ -84,13 +79,12 @@ public class GameView : MonoBehaviour
 
     private void PlayerOneScoreHandler(int score)
     {
-        playerOneScoreText.DOText($@"0{score}00", 0.5f, scrambleMode: ScrambleMode.Numerals);
+        playerOneScoreText.text = $@"0{score}00";
     }
 
     private void PlayerTwoScoreHandler(int score)
     {
-
-        playerTwoScoreText.DOText($@"0{score}00", 0.5f, scrambleMode: ScrambleMode.Numerals);
+        playerTwoScoreText.text = $@"0{score}00";
     }
 
     void FixedUpdate()
