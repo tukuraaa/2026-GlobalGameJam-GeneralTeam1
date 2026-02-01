@@ -21,16 +21,22 @@ public class GameView : MonoBehaviour
     [SerializeField]
     Button _resetButton;
 
+    [SerializeField]
+    EarthUnit earthUnit;
+
+    private int lastSecond = 0;
+
     public float TimeInGame {get; private set;}
-    public int lastSecond = 0;
 
     public Observable<Unit> ResetButtonClicked => _resetButton.OnClickAsObservable();
-    
 
-// public Observable a = Observable.Interval(TimeSpan.FromSeconds(1))
-//     .Select((_, i) => i)
-//     .Where(x => x % 2 == 0)
-//     .Subscribe(x => Console.WriteLine($"Interval:{x}"));
+    void OnValidate()
+    {
+        if(earthUnit == null)
+        {
+            earthUnit = FindFirstObjectByType<EarthUnit>(); //多分一つだけ、大丈夫
+        }
+    }
 
     void Start()
     {
