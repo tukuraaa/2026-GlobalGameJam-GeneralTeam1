@@ -3,6 +3,7 @@ using UnityEngine;
 
 public static class DataConst
 {
+    public const float BarrierTime = 2.0f;
     public const float UpLevelInterval = 10f;
     public const int MaxLevel = 9;
     public static float ScoreRate(int level)
