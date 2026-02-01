@@ -64,6 +64,9 @@ public class Player : MonoBehaviour
     /// </summary>
     [SerializeField]
     private float _velocitySpeed = 2f;
+    /// <summary>
+    /// 加速度の上限速度の変数
+    /// </summary>
     [SerializeField]
     private float _limitSpeed = 15f;
     /// <summary>
@@ -76,6 +79,16 @@ public class Player : MonoBehaviour
     /// </summary>
     [SerializeField]
     private UnityEvent _onEnter = null;
+    /// <summary>
+    /// プレイヤー衝突時の効果音の変数
+    /// </summary>
+    [SerializeField]
+    private AudioClip _hitSound = null;
+    /// <summary>
+    /// プレイヤー移動時の効果音の変数
+    /// </summary>
+    [SerializeField]
+    private AudioClip _moveSound = null;
 
     /// <summary>
     /// プレイヤーの水平方向入力値の変数
@@ -105,14 +118,33 @@ public class Player : MonoBehaviour
     /// プレイヤーの移動入力値の変数
     /// </summary>
     private Vector2 _moveInputValue = Vector2.zero;
+    /// <summary>
+    /// プレイヤーオブジェクトの配列の変数
+    /// </summary>
     private GameObject[] _players;
 
+    /// <summary>
+    /// イベント接触管理用のハッシュセット
+    /// </summary>
     HashSet<int> _onEnterCollided = new HashSet<int>();
 
     /// <summary>
     /// プレイヤー接触時のイベントのプロパティ
     /// </summary>
     public UnityEvent _OnEnter { get => _onEnter; set => _onEnter = value; }
+
+    /// <summary>
+    /// プレイヤーのオーディオソースの変数
+    /// </summary>
+    private AudioSource _audioSource = null;
+
+    /// <summary>
+    /// 初期設定を行う関数
+    /// </summary>
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     /// <summary>
     /// プレイヤーの位置を楕円軌道上に更新する関数
@@ -153,31 +185,44 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// プレイヤーの接触判定を固定時間間隔でチェックする関数
+    /// </summary>
     void FixedUpdate()
     {
-        checkPlayerHit();
+        checkPlayerHit();// プレイヤー接触判定のチェック
     }
 
+    /// <summary>
+    /// プレイヤーの接触判定を行う関数
+    /// </summary>
     void checkPlayerHit()
     {
-        if(_players == null)
+        // プレイヤーオブジェクトの配列が未初期化の場合
+        if (_players == null)
         {
-            _players = Stage.Instance.GetPlayers();
+            _players = Stage.Instance.GetPlayers();// プレイヤーオブジェクトを取得して初期化
         }
-        foreach(var player in _players)
+
+        // 各プレイヤーオブジェクトとの距離をチェック
+        foreach (var player in _players)
         {
-            if(player != this.gameObject)
+            // 自分自身との接触は無視
+            if (player != this.gameObject)
             {
-                float dist = Vector3.Distance(player.transform.position, this.transform.position);
-                if(dist < 0.5f && !_onEnterCollided.Contains(player.GetInstanceID()))
+                float dist = Vector3.Distance(player.transform.position, this.transform.position);// プレイヤー間の距離を計算
+
+                // 距離が0.5未満で、まだ接触イベントが発生していない場合
+                if (dist < 0.5f && !_onEnterCollided.Contains(player.GetInstanceID()))
                 {
-                    OnTriggerEnterManal(player.GetComponent<Collider>());
-                    _onEnterCollided.Add(player.GetInstanceID());
+                    OnTriggerEnterManal(player.GetComponent<Collider>());// 手動で接触イベントを呼び出し
+                    _onEnterCollided.Add(player.GetInstanceID());// 接触イベント発生を記録
                     Debug.Log($"Player Hit! {player.name}");
                 }
-                else if(dist >= 0.5f && _onEnterCollided.Contains(player.GetInstanceID()))
+                // 距離が0.5以上で、以前に接触イベントが発生していた場合
+                else if (dist >= 0.5f && _onEnterCollided.Contains(player.GetInstanceID()))
                 {
-                    _onEnterCollided.Remove(player.GetInstanceID());
+                    _onEnterCollided.Remove(player.GetInstanceID());// 接触イベント記録を削除
                     Debug.Log($"Player Leave! {player.name}");
                 }
             }
@@ -217,6 +262,13 @@ public class Player : MonoBehaviour
     /// <returns></returns>
     private IEnumerator OnStop()
     {
+        _audioSource.Stop();// 移動音を停止
+        _audioSource.PlayOneShot(_hitSound);// プレイヤー衝突音を再生
+
+        // プレイヤーが変な方向に移動しないように入力値をリセット
+        _horizontalX = 0;
+        _verticalY = 0;
+
         _isActiving = false;// 操作有効フラグを無効化
         yield return new WaitForSeconds(_stopTime);// 指定された停止時間だけ待機
 
@@ -225,10 +277,6 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSeconds(_waitTime);// 少し待機してから
         _isStopON = true;// 停止フラグを再度ONに設定
-
-        // プレイヤーが変な方向に移動しないように入力値をリセット
-        _horizontalX = 0;
-        _verticalY = 0;
     }
 
     /// <summary>
@@ -245,10 +293,12 @@ public class Player : MonoBehaviour
             _verticalY = _moveInputValue.y;// 垂直方向の入力値を設定
             _isMoving = (Mathf.Abs(_verticalY) != 0 || Mathf.Abs(_horizontalX) != 0);// 移動状態を更新
             _accelerationTime++;// 加速時間をインクリメント
+            _audioSource.PlayOneShot(_moveSound);
 
             // 移動していない場合
             if (!_isMoving)
             {
+                _audioSource.Stop();
                 _accelerationTime = 0;// 加速時間をリセット
                 _speed = _initialSpeed;// 速度を初期値にリセット
             }
