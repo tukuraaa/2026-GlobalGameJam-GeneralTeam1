@@ -166,6 +166,7 @@ MonoBehaviour:
   OwnerShooter: {fileID: 0}
   HitPlayerSe: {fileID: 8300000, guid: 506a439645917a649a56fc638c090c2e, type: 3}
   HitEarthSe: {fileID: 8300000, guid: 8663633f52f7afc4cad566a8f3a2ebcd, type: 3}
+  HitBarrierSe: {fileID: 8300000, guid: 1c33a2ba2b2a3884d849c08e15022cc3, type: 3}
 --- !u!114 &6459985082194080851
 MonoBehaviour:
   m_ObjectHideFlags: 0

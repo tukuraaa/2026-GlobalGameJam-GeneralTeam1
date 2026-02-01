@@ -44,10 +44,13 @@ public class Stage : Singleton<Stage>
         // hit earth
         if (hitObjLayer == _defaultLayer)
         {
+            AudioClip hitSe = EarthUnit.IsBarrierActive() 
+                ? hitMsg.DamageObj.HitBarrierSe : hitMsg.DamageObj.HitEarthSe;
+            AudioManager.Instance.PlayOneShotSe(hitSe);
+
             if (hitMsg.DamageObj.BaseDamagePoint >= 0) // damage
             {
                 EarthUnit.DoDamage(hitMsg.DamageObj.BaseDamagePoint);
-                AudioManager.Instance.PlayOneShotSe(hitMsg.DamageObj.HitEarthSe);
             }
             Debug.Log($"EarthUnit Hit! Remaining LifePoint: {EarthUnit.LifePoint.Value}");
         }
