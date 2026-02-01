@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1233959123618071674}
   - component: {fileID: 3834592576802452476}
   - component: {fileID: 2369853030728831220}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: objPlayer1
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -81,10 +81,17 @@ MonoBehaviour:
   _speed: 12
   _radiusA: 3.5
   _radiusB: 3.5
-  HorizontalX: 0
-  VerticalY: 0
-  IsMoving: 0
   _currentAngle: 3.14159
+  _inputTime: 0.01
+  _stopTime: 1
+  _playerId: 1
+  _playerCollider: {fileID: 1233959123618071674}
+  _otherCollider: {fileID: 0}
+  _horizontalX: 0
+  _verticalY: 0
+  _piMultiplier: 2
+  _isMoving: 0
+  _isStopON: 1
 --- !u!114 &2369853030728831220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +121,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3834592576802452476}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnMove
+        m_MethodName: MoveInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -131,7 +138,19 @@ MonoBehaviour:
     m_ActionId: 6b444451-8a00-4d00-a97e-f47457f736a8
     m_ActionName: 'Player/Look[/DualShock4GamepadHID/rightStick,/Mouse/delta]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3834592576802452476}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: BarrierInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6c2ab1b8-8984-453a-af3d-a3c78ae1679a
     m_ActionName: 'Player/Attack[/DualShock4GamepadHID/buttonWest,/Mouse/leftButton,/Keyboard/enter]'
   - m_PersistentCalls:
