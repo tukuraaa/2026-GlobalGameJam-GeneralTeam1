@@ -157,7 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageObj
   targetLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   MaxTargets: -1
   ContinuousInterval: 0
   BaseDamagePoint: -1
