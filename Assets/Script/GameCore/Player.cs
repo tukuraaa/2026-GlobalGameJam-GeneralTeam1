@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
 /// <summary>
 /// プレイヤーの操作を管理するクラス
@@ -87,6 +88,9 @@ public class Player : MonoBehaviour
     /// プレイヤーの移動入力値の変数
     /// </summary>
     private Vector2 _moveInputValue = Vector2.zero;
+    private GameObject[] _players;
+
+    HashSet<int> _onEnterCollided = new HashSet<int>();
 
     /// <summary>
     /// プレイヤー接触時のイベントのプロパティ
@@ -120,11 +124,42 @@ public class Player : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        checkPlayerHit();
+    }
+
+    void checkPlayerHit()
+    {
+        if(_players == null)
+        {
+            _players = Stage.Instance.GetPlayers();
+        }
+        foreach(var player in _players)
+        {
+            if(player != this.gameObject)
+            {
+                float dist = Vector3.Distance(player.transform.position, this.transform.position);
+                if(dist < 0.5f && !_onEnterCollided.Contains(player.GetInstanceID()))
+                {
+                    OnTriggerEnterManal(player.GetComponent<Collider>());
+                    _onEnterCollided.Add(player.GetInstanceID());
+                    Debug.Log($"Player Hit! {player.name}");
+                }
+                else if(dist >= 0.5f && _onEnterCollided.Contains(player.GetInstanceID()))
+                {
+                    _onEnterCollided.Remove(player.GetInstanceID());
+                    Debug.Log($"Player Leave! {player.name}");
+                }
+            }
+        }
+    }
+
     /// <summary>
     /// トリガー内に他のオブジェクトが侵入してきた際に呼び出される関数
     /// </summary>
     /// <param name="other"></param>
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnterManal(Collider other)
     {
         // プレイヤー接触判定
         if (other.CompareTag("Player"))

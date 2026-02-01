@@ -103,4 +103,8 @@ public class Stage : Singleton<Stage>
         }   
     }
 
+    public GameObject[] GetPlayers()
+    {
+        return GameObject.FindGameObjectsWithTag("Player");    
+    }
 }
