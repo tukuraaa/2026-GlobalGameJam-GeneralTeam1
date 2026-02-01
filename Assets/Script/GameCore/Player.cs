@@ -70,6 +70,21 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _limitSpeed = 15f;
     /// <summary>
+    /// ピッチボリュームの変数
+    /// </summary>
+    [SerializeField]
+    private float pitchVolume = 1.2f;
+    /// <summary>
+    /// ピッチのデフォルト値の変数
+    /// </summary>
+    [SerializeField]
+    private float defaultPitch = 1.0f;
+    /// <summary>
+    /// プレイヤー同士の距離制限の変数
+    /// </summary>
+    [SerializeField]
+    private float distanceLimit = 0.5f;
+    /// <summary>
     /// プレイヤーIDの変数
     /// </summary>
     [SerializeField]
@@ -213,14 +228,14 @@ public class Player : MonoBehaviour
                 float dist = Vector3.Distance(player.transform.position, this.transform.position);// プレイヤー間の距離を計算
 
                 // 距離が0.5未満で、まだ接触イベントが発生していない場合
-                if (dist < 0.5f && !_onEnterCollided.Contains(player.GetInstanceID()))
+                if (dist < distanceLimit && !_onEnterCollided.Contains(player.GetInstanceID()))
                 {
                     OnTriggerEnterManal(player.GetComponent<Collider>());// 手動で接触イベントを呼び出し
                     _onEnterCollided.Add(player.GetInstanceID());// 接触イベント発生を記録
                     Debug.Log($"Player Hit! {player.name}");
                 }
                 // 距離が0.5以上で、以前に接触イベントが発生していた場合
-                else if (dist >= 0.5f && _onEnterCollided.Contains(player.GetInstanceID()))
+                else if (dist >= distanceLimit && _onEnterCollided.Contains(player.GetInstanceID()))
                 {
                     _onEnterCollided.Remove(player.GetInstanceID());// 接触イベント記録を削除
                     Debug.Log($"Player Leave! {player.name}");
@@ -263,7 +278,10 @@ public class Player : MonoBehaviour
     private IEnumerator OnStop()
     {
         _audioSource.Stop();// 移動音を停止
-        _audioSource.PlayOneShot(_hitSound);// プレイヤー衝突音を再生
+
+        // 衝突音を再生（ピッチを上げる）
+        _audioSource.pitch = pitchVolume;
+        _audioSource.PlayOneShot(_hitSound);
 
         // プレイヤーが変な方向に移動しないように入力値をリセット
         _horizontalX = 0;
@@ -293,6 +311,9 @@ public class Player : MonoBehaviour
             _verticalY = _moveInputValue.y;// 垂直方向の入力値を設定
             _isMoving = (Mathf.Abs(_verticalY) != 0 || Mathf.Abs(_horizontalX) != 0);// 移動状態を更新
             _accelerationTime++;// 加速時間をインクリメント
+
+            // 移動音を再生（ピッチを元に戻す）
+            _audioSource.pitch = defaultPitch;
             _audioSource.PlayOneShot(_moveSound);
 
             // 移動していない場合

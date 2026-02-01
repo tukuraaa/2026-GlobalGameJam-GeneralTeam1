@@ -92,6 +92,8 @@ MonoBehaviour:
   _accelerationTime: 0
   _velocitySpeed: 50
   _limitSpeed: 15
+  pitchVolume: 2
+  defaultPitch: 1
   _playerId: 1
   _onEnter:
     m_PersistentCalls:

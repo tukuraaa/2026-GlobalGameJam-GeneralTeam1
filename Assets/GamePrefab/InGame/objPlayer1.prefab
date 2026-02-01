@@ -92,6 +92,8 @@ MonoBehaviour:
   _accelerationTime: 0
   _velocitySpeed: 100
   _limitSpeed: 15
+  pitchVolume: 2
+  defaultPitch: 1
   _playerId: 1
   _onEnter:
     m_PersistentCalls:
@@ -108,8 +110,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _hitSound: {fileID: 8300000, guid: fe6614c635ba755498af4a5c5fdd9712, type: 3}
-  _moveSound: {fileID: 8300000, guid: 1b6d226ae8b5eae43abbc6f71f5bf059, type: 3}
+  _hitSound: {fileID: 8300000, guid: be29c60c9fe06b645a362af6d47fa742, type: 3}
+  _moveSound: {fileID: 8300000, guid: 06bab25891fdd0b44b5341a9eb59f31f, type: 3}
   _horizontalX: 0
   _verticalY: 0
   _piMultiplier: 2
