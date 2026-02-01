@@ -999,7 +999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5619904952058803096, guid: 731ab9aca87543f4da3e2d4595862468, type: 3}
       propertyPath: _initHp
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5865856251952149385, guid: 731ab9aca87543f4da3e2d4595862468, type: 3}
       propertyPath: m_LocalPosition.x

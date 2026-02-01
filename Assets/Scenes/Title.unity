@@ -565,6 +565,10 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6337184575390790437, guid: 35460517211934af384705fe3d449268, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 5441290482527843461, guid: 4bcdd0f6606ba4fbea8a7d63982c62e9, type: 3}
     - target: {fileID: 6508643049559602655, guid: 35460517211934af384705fe3d449268, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.00012171847
@@ -678,7 +682,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7991936356537956054, guid: 35460517211934af384705fe3d449268, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35460517211934af384705fe3d449268, type: 3}

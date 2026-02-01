@@ -55,6 +55,7 @@ public class GameOverView : MonoBehaviour
     public void UpdateScore()
     {
         scoreText.text = $"Score: {PlayerPrefs.GetInt("Score")}";
+        HighScoresObject.TryUpdateDataFile(new("AAA", PlayerPrefs.GetInt("Score")));
         PlayerPrefs.DeleteKey("Score"); //reset
     }
 }
