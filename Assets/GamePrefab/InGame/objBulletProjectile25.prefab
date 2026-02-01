@@ -216,9 +216,11 @@ MonoBehaviour:
   MaxTargets: -1
   ContinuousInterval: 0
   BaseDamagePoint: 1
+  BaseScorePoint: 0
   HitTimes: 1
   OwnerShooter: {fileID: 0}
-  _hitPlayerSe: {fileID: 8300000, guid: 506a439645917a649a56fc638c090c2e, type: 3}
+  HitPlayerSe: {fileID: 8300000, guid: 506a439645917a649a56fc638c090c2e, type: 3}
+  HitEarthSe: {fileID: 8300000, guid: 506a439645917a649a56fc638c090c2e, type: 3}
   _playHitObj: {fileID: 0}
 --- !u!114 &6459985082194080851
 MonoBehaviour:
@@ -245,7 +247,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408a151292638f142aa53f6744fa3e75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayHitObj
-  Lifetime: 3
   hit: {fileID: 1714524745656972, guid: 1efdac5f1b28acd4997a0580dd7a9702, type: 3}
 --- !u!1001 &7847658353986643952
 PrefabInstance:

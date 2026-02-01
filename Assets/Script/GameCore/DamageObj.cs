@@ -9,21 +9,13 @@ public class DamageObj : MonoBehaviour
     public int MaxTargets = -1; // -1 means unlimited
     public float ContinuousInterval = 0f; // Interval for continuous damage, 0 means no continuous damage
     public int BaseDamagePoint = 1;
+    public int BaseScorePoint = 0;
     public int HitTimes = 1;
 
     private bool _isFirstInitialize = true;
     public Shooter OwnerShooter;
-    public AudioClip _hitPlayerSe = null;
-    public PlayHitObj _playHitObj = null;
-
-    void Awake()
-    {
-        if(_playHitObj == null)
-        {
-            _playHitObj = GetComponent<PlayHitObj>();
-        }
-        _playHitObj.OnHitPlayer += () => { AudioManager.Instance.PlayOneShotSe(_hitPlayerSe); };
-    }
+    public AudioClip HitPlayerSe = null;
+    public AudioClip HitEarthSe = null;
 
     public void Initialize(Shooter owner, float lifetime)
     {
@@ -40,8 +32,18 @@ public class DamageObj : MonoBehaviour
         OwnerShooter = owner;
         Lifetime.Subscribe((value) =>
         {
-            if (Lifetime.Value <= 0)
+            if (Lifetime.Value > 0 || Lifetime.Value == -1) return;
+
+            if(OwnerShooter.GetType() == typeof(ItemShooter))
+            {
+                // ItemShooterはItemを一つだけ出す想定なので、オブジェクトプールを使用しない
+                GetComponent<BaseMover>().IsInit = false;
+                gameObject.SetActive(false);
+            }
+            else
+            {
                 OwnerShooter.BulletPool.Release(this.gameObject);
+            }
         }).AddTo(this);
 
         _isFirstInitialize = false;
@@ -57,6 +59,8 @@ public class DamageObj : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if ((targetLayer.value & (1 << other.gameObject.layer)) == 0) return;
+
         this.gameObject.SetActive(false);
         OwnerShooter?.OnDamageObjHit(this, other);        
     }

@@ -5,8 +5,6 @@ using UnityEngine;
 public class PlayHitObj : MonoBehaviour
 {
     public GameObject hit = null;
-
-    public event Action OnHitPlayer;
     
     void  OnTriggerEnter(Collider other)
     {        
@@ -20,11 +18,6 @@ public class PlayHitObj : MonoBehaviour
             pos += normal * hitOffset;            
             var hitInstance = Instantiate(hit, pos, rot);
             hitInstance.transform.LookAt(pos + normal);
-
-            if (other.CompareTag("Player"))
-            {
-                OnHitPlayer?.Invoke();
-            }
 
             //Destroy hit effects depending on particle Duration time
             var hitPs = hitInstance.GetComponent<ParticleSystem>();
