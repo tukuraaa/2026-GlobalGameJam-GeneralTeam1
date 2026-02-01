@@ -219,7 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPower
   fullDuration: 5
   powerType: 0
-  playerInput: {fileID: 5114279458174929302}
+  barrier: {fileID: 8262716166863691298}
   usePowerInputAction:
     m_Name: Use Power Input
     m_Type: 0
@@ -230,20 +230,60 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 41c0937b-1a7f-4532-83ac-c368678b9ca6
-      m_Path: <Keyboard>/w
-      m_Interactions: Hold
+      m_Path: <Keyboard>/a
+      m_Interactions: Tap
       m_Processors: 
       m_Groups: 
       m_Action: Use Power Input
       m_Flags: 0
     - m_Name: 
       m_Id: 58a299a7-6275-4017-9a47-bf0a6edab3b4
-      m_Path: <Gamepad>/leftShoulder
-      m_Interactions: Hold
+      m_Path: <Keyboard>/d
+      m_Interactions: Tap
       m_Processors: 
       m_Groups: 
       m_Action: Use Power Input
       m_Flags: 0
+    - m_Name: Joystick
+      m_Id: 58a41b7d-12c8-4939-91cb-8cb761c26eb2
+      m_Path: 2DVector
+      m_Interactions: Tap
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 5f696d2d-b3b3-43db-9fea-1f621cad4b22
+      m_Path: 
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 0a380811-28ae-4ce8-984d-04b6795cea8b
+      m_Path: 
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 8
+    - m_Name: left
+      m_Id: f081f098-89d0-49b8-b4ce-8a2bde67d111
+      m_Path: <Gamepad>/leftStick/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 3150e457-57e1-4da3-94fc-30f9372dc00f
+      m_Path: <Gamepad>/leftStick/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 8
     m_Flags: 0
 --- !u!1001 &2742062589713852839
 PrefabInstance:

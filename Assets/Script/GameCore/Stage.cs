@@ -23,6 +23,7 @@ public class Stage : Singleton<Stage>
             shooter.OnHit().Subscribe(
                 (hitMsg) =>
                 {
+                    Debug.Log($"hitMsg.HitObj: {hitMsg.HitObj}");
                     if(hitMsg.HitObj.gameObject.GetInstanceID() == EarthUnit.gameObject.GetInstanceID())
                     {
                         if (hitMsg.DamageObj.BaseDamagePoint >= 0) // damage

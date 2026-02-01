@@ -65,7 +65,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 1.2, z: 1.2}
+  m_Size: {x: 2.1, y: 1.2, z: 1.2}
   m_Center: {x: 0.25, y: 0, z: 0}
 --- !u!114 &3834592576802452476
 MonoBehaviour:
@@ -217,9 +217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a63e35ac89d1a45caa18d6a0084df78b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPower
-  fullDuration: 5
+  fullDuration: 30
   powerType: 0
-  playerInput: {fileID: 2369853030728831220}
+  barrier: {fileID: 538286519077714612}
   usePowerInputAction:
     m_Name: Use Power Input
     m_Type: 0
@@ -230,20 +230,60 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: ba093e87-2a7f-41d2-8cd6-34d36c956cc0
-      m_Path: <Keyboard>/upArrow
-      m_Interactions: Hold
+      m_Path: <Keyboard>/leftArrow
+      m_Interactions: Tap
       m_Processors: 
       m_Groups: 
       m_Action: Use Power Input
       m_Flags: 0
     - m_Name: 
       m_Id: 06646d14-de53-49a0-899e-ab487cc0faf4
-      m_Path: <Gamepad>/rightShoulder
-      m_Interactions: Hold
+      m_Path: <Keyboard>/rightArrow
+      m_Interactions: Tap
       m_Processors: 
       m_Groups: 
       m_Action: Use Power Input
       m_Flags: 0
+    - m_Name: Joystick
+      m_Id: f61f0458-83b0-45e9-aec2-55196a660258
+      m_Path: 2DVector
+      m_Interactions: Tap
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 4
+    - m_Name: Up
+      m_Id: 984206cc-3b30-441d-bd33-a96184a9d222
+      m_Path: 
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 8
+    - m_Name: Down
+      m_Id: 46a41885-3465-470b-92db-4b478fd233bf
+      m_Path: 
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 8
+    - m_Name: Left
+      m_Id: e5e1cde4-d21d-446f-8b4a-34e9c46d725b
+      m_Path: <Gamepad>/rightStick/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 8
+    - m_Name: Right
+      m_Id: f7a7b147-3d6a-41ec-a636-c68be393322c
+      m_Path: <Gamepad>/rightStick/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Use Power Input
+      m_Flags: 8
     m_Flags: 0
 --- !u!1001 &3747044280926477910
 PrefabInstance:

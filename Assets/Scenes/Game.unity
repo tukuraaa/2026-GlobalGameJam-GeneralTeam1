@@ -314,11 +314,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!65 &271716922 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 538286519077714612, guid: 897f96ba766871e4497685ffd0f2557a, type: 3}
-  m_PrefabInstance: {fileID: 8585241378735666738}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &549451563 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5619904952058803096, guid: 731ab9aca87543f4da3e2d4595862468, type: 3}
@@ -557,11 +552,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!65 &964061068 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 8262716166863691298, guid: 1a7cb66dc5a74594f85cfecfc6852c14, type: 3}
-  m_PrefabInstance: {fileID: 5591410270072531531}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &991137382
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1201,10 +1191,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8047783321853476797, guid: 1a7cb66dc5a74594f85cfecfc6852c14, type: 3}
-      propertyPath: barrier
-      value: 
-      objectReference: {fileID: 964061068}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1411,10 +1397,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7899966765312709806, guid: 897f96ba766871e4497685ffd0f2557a, type: 3}
-      propertyPath: barrier
-      value: 
-      objectReference: {fileID: 271716922}
     - target: {fileID: 8763340661703558685, guid: 897f96ba766871e4497685ffd0f2557a, type: 3}
       propertyPath: m_Name
       value: objPlayer1

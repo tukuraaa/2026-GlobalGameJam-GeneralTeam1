@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Player), typeof(PlayerInput))]
+[RequireComponent(typeof(Player))]
 [DisallowMultipleComponent] //プレイヤーは一つパワーだけ
 public class PlayerPower : MonoBehaviour
 {
@@ -13,8 +13,8 @@ public class PlayerPower : MonoBehaviour
     }
 
 
-    [Range(0, 5f)]
-    public float fullDuration = 5f;
+    [Range(0, 30f)]
+    public float fullDuration = 30f;
 
     [SerializeField]
     PowerType powerType = PowerType.Barrier;
@@ -44,12 +44,12 @@ public class PlayerPower : MonoBehaviour
     void OnDestroy()
     {
         usePowerInputAction.Disable();
-
+        // barrier.
     }
 
     void Update()
     {
-        Debug.Log($"duration: {CurrentDuration:f2} s");
+        // Debug.Log($"duration: {CurrentDuration:f2} s");
         if (usePowerInputAction.inProgress)
         {
             CurrentDuration -= Time.deltaTime;
