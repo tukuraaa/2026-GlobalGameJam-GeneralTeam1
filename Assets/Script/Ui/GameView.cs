@@ -1,4 +1,7 @@
 using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using R3;
 using TMPro;
 using UnityEngine;
@@ -46,7 +49,9 @@ public class GameView : MonoBehaviour
     public float TimeInGame {get; private set;}
 
     public ReactiveProperty<int> playerOneScore = new ReactiveProperty<int>(0);
+    private int playerOnePrevScore = 0;
     public ReactiveProperty<int> playerTwoScore = new ReactiveProperty<int>(0);
+    private int playerTwoPrevScore = 0;
 
 
     public Observable<Unit> ResetButtonClicked => _resetButton.OnClickAsObservable();
@@ -61,13 +66,14 @@ public class GameView : MonoBehaviour
 
     void Start()
     {
+        EarthHPBar.Init(earthUnit.LifePoint.Value);
         new GameViewCtrl(this);
         TimeInGame = 0f;
         playerOneScore.Subscribe(PlayerOneScoreHandler).AddTo(this);
+        // playerOneScore.SubscribeAwait<int>(PlayerOneScoreHandler).AddTo(this);
         playerTwoScore.Subscribe(PlayerTwoScoreHandler).AddTo(this);
         earthUnit.LifePoint.Subscribe(OnEarthDamage).AddTo(this);
 
-        EarthHPBar.Init(earthUnit.LifePoint.Value);
     }
 
     private void OnEarthDamage(int hp)
@@ -75,22 +81,47 @@ public class GameView : MonoBehaviour
         EarthHPBar.currentValue.Value = hp;
     }
 
-    private void PlayerTwoScoreHandler(int score)
+    // private async ValueTask PlayerOneScoreHandler(int score, CancellationToken ct)
+    // {
+    //     await ScoreAnimation(playerOneScoreText, playerOnePrevScore, playerOneScore.Value);
+    // }
+
+    private void PlayerOneScoreHandler(int score)
     {
         playerOneScoreText.text = $@"0{score}00";
     }
 
-    private void PlayerOneScoreHandler(int score)
+    private void PlayerTwoScoreHandler(int score)
     {
+
         playerTwoScoreText.text = $@"0{score}00";
     }
+
+    
+
+    // private async Task ScoreAnimation(TextMeshProUGUI text, int start, int end)
+    // {
+    //     float tempScore = start * 100;
+    //     int endScore = end * 100;
+    //     int diff = (end - start) * 100;
+    //     float increment = diff / 20f;
+    //     for (int i = 0; i < 20; i++)
+    //     {
+    //         tempScore += increment;
+    //         Debug.Log($"tempScore:{tempScore} vs {playerOneScore.Value}");
+    //         text.text = $"0{tempScore:f0}";
+    //         await UniTask.WaitForSeconds(0.05f);
+    //     }
+    // }
 
     void FixedUpdate()
     {
         TimeInGame += Time.fixedDeltaTime * DataConst.ScoreRate(Stage.Instance.NowLevel.CurrentValue);
         if(Mathf.RoundToInt(TimeInGame) - lastSecond >= 1)
         {
+            playerOnePrevScore = playerOneScore.Value;
             playerOneScore.Value = Mathf.RoundToInt(TimeInGame);
+            playerTwoPrevScore = playerTwoScore.Value;
             playerTwoScore.Value = Mathf.RoundToInt(TimeInGame);
         }
     }
@@ -98,7 +129,9 @@ public class GameView : MonoBehaviour
     public void UpdateTimes(int times)
     {
         //just minus all their scores. 全部引くスコア。
+        playerOnePrevScore = playerOneScore.Value;
         playerOneScore.Value -= Mathf.RoundToInt(DataConst.ScoreRate(Stage.Instance.NowLevel.CurrentValue));
+        playerTwoPrevScore = playerTwoScore.Value;
         playerTwoScore.Value -= Mathf.RoundToInt(DataConst.ScoreRate(Stage.Instance.NowLevel.CurrentValue));
 
 
