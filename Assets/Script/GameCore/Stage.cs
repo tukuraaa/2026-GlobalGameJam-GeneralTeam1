@@ -16,7 +16,7 @@ public class Stage : Singleton<Stage>
     int _playerLayer;
     int _defaultLayer;
     [SerializeField]
-    AudioClip _bgm;
+    AudioClip _bgm = null;
 
     void Start()
     {
