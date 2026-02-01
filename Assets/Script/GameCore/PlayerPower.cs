@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Localization.SmartFormat.PersistentVariables;
 
 [RequireComponent(typeof(Player), typeof(PlayerInput))]
 [DisallowMultipleComponent] //プレイヤーは一つパワーだけ
@@ -21,7 +20,7 @@ public class PlayerPower : MonoBehaviour
     PowerType powerType = PowerType.Barrier;
 
     [SerializeField]
-    PlayerInput playerInput;
+    BoxCollider barrier;
 
     [SerializeField]
     InputAction usePowerInputAction;
@@ -30,18 +29,11 @@ public class PlayerPower : MonoBehaviour
     public float CurrentDuration {
         get => _duration; 
         private set {
-            _duration = (value <= fullDuration) ? value : fullDuration;  
+            _duration = (value <= fullDuration) ? value : fullDuration;
+            _duration = (_duration >= 0) ? _duration : 0;
         }
     }
 
-    
-    void OnValidate()
-    {
-        if(playerInput == null)
-        {
-            playerInput = GetComponent<PlayerInput>();
-        }
-    }
 
     void Start()
     {
@@ -61,16 +53,16 @@ public class PlayerPower : MonoBehaviour
         if (usePowerInputAction.inProgress)
         {
             CurrentDuration -= Time.deltaTime;
-            switch (powerType)
-            {
-                case PowerType.Barrier:
-                    //do barrier things
-                    
-                    break;
-                case PowerType.Beam:
-                    break;
-            }
-            
+        }
+        switch (powerType)
+        {
+            case PowerType.Barrier:
+                //do barrier things
+
+                barrier.gameObject.SetActive(usePowerInputAction.inProgress && CurrentDuration > 0);
+                break;
+            case PowerType.Beam:
+                break;
         }
     }
 }
