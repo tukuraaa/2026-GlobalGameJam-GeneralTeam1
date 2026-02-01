@@ -30,6 +30,7 @@ public class GameOverViewCtrl
             await MySceneManager.Instance.QuitGame();
         }).AddTo(_view);
 
+
         _view.UpdateScore();
 
     }    

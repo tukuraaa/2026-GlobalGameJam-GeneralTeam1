@@ -823,6 +823,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1709961164}
     m_Modifications:
+    - target: {fileID: 2453552585071531411, guid: 8a1e55ed49f3349ef89f8acdf79039a0, type: 3}
+      propertyPath: m_text
+      value: Enter Name Initals
+      objectReference: {fileID: 0}
+    - target: {fileID: 2453552585071531411, guid: 8a1e55ed49f3349ef89f8acdf79039a0, type: 3}
+      propertyPath: m_fontSize
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2453552585071531411, guid: 8a1e55ed49f3349ef89f8acdf79039a0, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 3756667244550005975, guid: 8a1e55ed49f3349ef89f8acdf79039a0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -902,6 +914,10 @@ PrefabInstance:
     - target: {fileID: 3756667244550005975, guid: 8a1e55ed49f3349ef89f8acdf79039a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727505278006421390, guid: 8a1e55ed49f3349ef89f8acdf79039a0, type: 3}
+      propertyPath: m_CharacterLimit
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8829188802811944454, guid: 8a1e55ed49f3349ef89f8acdf79039a0, type: 3}
       propertyPath: m_Name

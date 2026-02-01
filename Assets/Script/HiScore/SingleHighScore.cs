@@ -7,9 +7,9 @@ public class SingleHighScore : IComparable<SingleHighScore>
     public string name;
     public int score;
 
-    public string ToString()
+    public new string ToString()
     {
-        return $"High Score: {name}, {score:G2}";
+        return $"High Score: {name}, {score}";
     }
 
     public int CompareTo(SingleHighScore other)

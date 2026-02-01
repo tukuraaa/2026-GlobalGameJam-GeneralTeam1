@@ -1,3 +1,4 @@
+using System;
 using R3;
 using TMPro;
 using UnityEngine;
@@ -5,6 +6,10 @@ using UnityEngine.UI;
 
 public class GameOverView : MonoBehaviour
 {
+    [SerializeField]
+    TMP_InputField nameInput;
+
+
     [SerializeField]
     TextMeshProUGUI scoreText;
 
@@ -17,7 +22,7 @@ public class GameOverView : MonoBehaviour
     [SerializeField]
     Button quitButton;
     
-
+    // public Observable<string> OnNameInput => nameInput.OnValueChangedAsObservable();
     // public Observable<int> OnGameOver = new Observable<int>()
     public Observable<Unit> OnRestart => restartButton.OnClickAsObservable();
 
@@ -27,6 +32,10 @@ public class GameOverView : MonoBehaviour
 
     void OnValidate()
     {
+        if(nameInput == null)
+        {
+            nameInput = transform.Find("NameInput").GetComponent<TMP_InputField>();
+        }
         if(scoreText == null)
         {
             scoreText = transform.Find("ScoreText").GetComponent<TextMeshProUGUI>();
@@ -51,11 +60,15 @@ public class GameOverView : MonoBehaviour
         new GameOverViewCtrl(this);
     }
 
-
+    void OnDisable()    //やば… Just add to the highscore when player closes.
+    {
+        Debug.Log(nameInput.text);
+        HighScoresObject.TryUpdateDataFile(new(nameInput.text, PlayerPrefs.GetInt("Score")));
+        PlayerPrefs.DeleteKey("Score"); //reset
+        nameInput.text = "";
+    }
     public void UpdateScore()
     {
-        scoreText.text = $"Score: {PlayerPrefs.GetInt("Score")}";
-        HighScoresObject.TryUpdateDataFile(new("AAA", PlayerPrefs.GetInt("Score")));
-        PlayerPrefs.DeleteKey("Score"); //reset
+        scoreText.text = $"Score: 0{PlayerPrefs.GetInt("Score")}00";
     }
 }
