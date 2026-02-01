@@ -846,7 +846,7 @@ MonoBehaviour:
   - {fileID: 709533251}
   - {fileID: 1055527066}
   - {fileID: 629425595}
-  _bgm: {fileID: 0}
+  _bgm: {fileID: 8300000, guid: 0294084b52d2df14ba4fba6ac7ddb545, type: 3}
 --- !u!4 &1949005044
 Transform:
   m_ObjectHideFlags: 0
