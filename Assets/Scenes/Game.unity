@@ -1295,6 +1295,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InGameView
       objectReference: {fileID: 0}
+    - target: {fileID: 2761112919177176920, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+      propertyPath: EarthHPBar
+      value: 
+      objectReference: {fileID: 5999949780491368524}
     - target: {fileID: 5093420913229066564, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1326,6 +1330,10 @@ PrefabInstance:
     - target: {fileID: 5290605416742476148, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743859901465214884, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+      propertyPath: m_text
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6556842577707805405, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1426,8 +1434,49 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2858045630927735951, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5999949780491368524}
   m_SourcePrefab: {fileID: 100100000, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+--- !u!114 &5999949780491368521 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5743859901465214884, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+  m_PrefabInstance: {fileID: 5999949780491368520}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!224 &5999949780491368522 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1924129120691043300, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+  m_PrefabInstance: {fileID: 5999949780491368520}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5999949780491368523 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2858045630927735951, guid: 9f132b06a296f074bafa61fe6a7ee4f9, type: 3}
+  m_PrefabInstance: {fileID: 5999949780491368520}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5999949780491368524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5999949780491368523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 635775524396b4337bf6edbd21c7a4c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleProgressBar
+  isVertical: 0
+  startingDimension: 455
+  rectTransform: {fileID: 5999949780491368522}
+  textDisplay: {fileID: 5999949780491368521}
+  maxValue: 1
 --- !u!1001 &8585241378735666738
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,8 +8,7 @@ using UnityEngine.UI;
 public class GameView : MonoBehaviour
 {
     
-    [SerializeField]
-    TextMeshProUGUI _txtHp;
+
 
     [SerializeField]
     TextMeshProUGUI playerOneScoreText;
@@ -23,6 +22,28 @@ public class GameView : MonoBehaviour
 
     [SerializeField]
     EarthUnit earthUnit;
+
+    [Space]
+    [Header("player 1")]
+
+    #region プレイヤー 1 スコアと力
+    // [SerializeField]
+
+
+
+
+    #endregion
+
+    #region プレイヤー 2 スコアと力
+
+    #endregion
+
+    [Space]
+    [Header("Earth HP")]
+
+
+    [SerializeField]
+    SimpleProgressBar EarthHPBar;
 
     private int lastSecond = 0;
 
@@ -61,7 +82,8 @@ public class GameView : MonoBehaviour
 
     public void UpdateHp(int hp)
     {
-        _txtHp.text = $@"HP : {hp}";
+        EarthHPBar.currentValue.Value = hp; 
+        // _txtHp.text = $@"HP : {hp}";
     }    
 
     public void UpdateScore(int score)

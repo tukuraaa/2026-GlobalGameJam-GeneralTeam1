@@ -41,12 +41,6 @@ public class PlayerPower : MonoBehaviour
         usePowerInputAction.Enable();
     }
 
-    void OnDestroy()
-    {
-        usePowerInputAction.Disable();
-        // barrier.
-    }
-
     void Update()
     {
         // Debug.Log($"duration: {CurrentDuration:f2} s");
