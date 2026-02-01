@@ -452,7 +452,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1000
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 79cd2a9807da54c50a5d683cf96cbb6c, type: 2}
   m_sharedMaterial: {fileID: 4853141954498466004, guid: 79cd2a9807da54c50a5d683cf96cbb6c, type: 2}
@@ -578,11 +578,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e08818f193f2d6b499f75e9ae67a40bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameView
-  _txtHp: {fileID: 5743859901465214884}
-  playerOneScoreText: {fileID: 2507112388460246829}
-  playerTwoScoreText: {fileID: 0}
   _resetButton: {fileID: 2412130856613312659}
   earthUnit: {fileID: 0}
+  playerOneScoreText: {fileID: 2507112388460246829}
+  playerTwoScoreText: {fileID: 1229339698249376110}
+  EarthHPBar: {fileID: 5306111978528808911}
 --- !u!1 &2858045630927735951
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,6 +595,7 @@ GameObject:
   - component: {fileID: 5551818139701957236}
   - component: {fileID: 8016121534474281736}
   - component: {fileID: 6321571759703742068}
+  - component: {fileID: 5306111978528808911}
   m_Layer: 5
   m_Name: BarFill
   m_TagString: Untagged
@@ -673,6 +674,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5306111978528808911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2858045630927735951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 635775524396b4337bf6edbd21c7a4c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleProgressBar
+  isVertical: 0
+  startingDimension: 455
+  rectTransform: {fileID: 1924129120691043300}
+  textDisplay: {fileID: 5743859901465214884}
+  maxValue: 1
 --- !u!1 &2920461933743825739
 GameObject:
   m_ObjectHideFlags: 0

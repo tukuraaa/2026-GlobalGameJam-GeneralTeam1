@@ -24,7 +24,10 @@ public class SimpleProgressBar : MonoBehaviour
     [SerializeField]
     float maxValue;
     
+
     public ReactiveProperty<float> currentValue;
+    private bool _isInitialized = false; 
+
 
     void OnValidate()
     {
@@ -47,6 +50,11 @@ public class SimpleProgressBar : MonoBehaviour
     {
         currentValue.Subscribe(ValueChangeHandler);
     }
+    public void Init(float max)
+    {
+        maxValue = max;
+        _isInitialized = true;
+    }
 
     private void ValueChangeHandler(float value)
     {
@@ -55,12 +63,19 @@ public class SimpleProgressBar : MonoBehaviour
         {
             textDisplay.text = $"{currentValue:f0}";
         }
-        if (isVertical)
+        if (!isVertical)
         {
-
-            newDelta.y = startingDimension * value / maxValue;
-            Vector2.Lerp(rectTransform.sizeDelta, newDelta, 0.5f);
+            //bruh horizontal
+            Debug.Log($"value:{value} vs: {maxValue}");
+            // Debug.Log($"newX: {startingDimension * value / maxValue} prevX: {startingDimension}");
+            newDelta.x = startingDimension * value / maxValue;
+            rectTransform.sizeDelta = Vector2.Lerp(rectTransform.sizeDelta, newDelta, 0.5f);
+        }
+        else
+        {
+            
         }
     }
+
 
 }

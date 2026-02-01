@@ -7,15 +7,6 @@ using UnityEngine.UI;
 
 public class GameView : MonoBehaviour
 {
-    
-
-
-    [SerializeField]
-    TextMeshProUGUI playerOneScoreText;
-
-    [SerializeField]
-    [FormerlySerializedAs("_txtHitTimes")]
-    TextMeshProUGUI playerTwoScoreText;
 
     [SerializeField]
     Button _resetButton;
@@ -28,14 +19,19 @@ public class GameView : MonoBehaviour
 
     #region プレイヤー 1 スコアと力
     // [SerializeField]
-
+    [SerializeField]
+    TextMeshProUGUI playerOneScoreText;
 
 
 
     #endregion
 
-    #region プレイヤー 2 スコアと力
+    [Space]
+    [Header("player 2")]
 
+    #region プレイヤー 2 スコアと力
+    [SerializeField]
+    TextMeshProUGUI playerTwoScoreText;
     #endregion
 
     [Space]
@@ -48,6 +44,10 @@ public class GameView : MonoBehaviour
     private int lastSecond = 0;
 
     public float TimeInGame {get; private set;}
+
+    public ReactiveProperty<int> playerOneScore = new ReactiveProperty<int>(0);
+    public ReactiveProperty<int> playerTwoScore = new ReactiveProperty<int>(0);
+
 
     public Observable<Unit> ResetButtonClicked => _resetButton.OnClickAsObservable();
 
@@ -63,21 +63,45 @@ public class GameView : MonoBehaviour
     {
         new GameViewCtrl(this);
         TimeInGame = 0f;
+        playerOneScore.Subscribe(PlayerOneScoreHandler).AddTo(this);
+        playerTwoScore.Subscribe(PlayerTwoScoreHandler).AddTo(this);
+        earthUnit.LifePoint.Subscribe(OnEarthDamage).AddTo(this);
+
+        EarthHPBar.Init(earthUnit.LifePoint.Value);
+    }
+
+    private void OnEarthDamage(int hp)
+    {
+        EarthHPBar.currentValue.Value = hp;
+    }
+
+    private void PlayerTwoScoreHandler(int score)
+    {
+        playerOneScoreText.text = $@"0{score}00";
+    }
+
+    private void PlayerOneScoreHandler(int score)
+    {
+        playerTwoScoreText.text = $@"0{score}00";
     }
 
     void FixedUpdate()
     {
-        TimeInGame += (Time.fixedDeltaTime) * DataConst.ScoreRate(Stage.Instance.NowLevel.CurrentValue);
+        TimeInGame += Time.fixedDeltaTime * DataConst.ScoreRate(Stage.Instance.NowLevel.CurrentValue);
         if(Mathf.RoundToInt(TimeInGame) - lastSecond >= 1)
         {
-            lastSecond += 1;
-            UpdateScore(Mathf.RoundToInt(TimeInGame));
+            playerOneScore.Value = Mathf.RoundToInt(TimeInGame);
+            playerTwoScore.Value = Mathf.RoundToInt(TimeInGame);
         }
     }
 
     public void UpdateTimes(int times)
     {
-        playerTwoScoreText.text = $@"HitTimes : {times}";
+        //just minus all their scores. 全部引くスコア。
+        playerOneScore.Value -= Mathf.RoundToInt(DataConst.ScoreRate(Stage.Instance.NowLevel.CurrentValue));
+        playerTwoScore.Value -= Mathf.RoundToInt(DataConst.ScoreRate(Stage.Instance.NowLevel.CurrentValue));
+
+
     }
 
     public void UpdateHp(int hp)
@@ -86,9 +110,4 @@ public class GameView : MonoBehaviour
         // _txtHp.text = $@"HP : {hp}";
     }    
 
-    public void UpdateScore(int score)
-    {
-        playerOneScoreText.text = $@"Score : {score}";
-        
-    }
 }
