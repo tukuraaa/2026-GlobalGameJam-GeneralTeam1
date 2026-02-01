@@ -157,14 +157,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageObj
   targetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 256
   MaxTargets: -1
   ContinuousInterval: 0
   BaseDamagePoint: -1
   BaseScorePoint: 0
   HitTimes: 1
   OwnerShooter: {fileID: 0}
-  HitPlayerSe: {fileID: 8300000, guid: 506a439645917a649a56fc638c090c2e, type: 3}
+  HitPlayerSe: {fileID: 8300000, guid: 70851f62f0400e9469f8709f0606b1bb, type: 3}
   HitEarthSe: {fileID: 8300000, guid: 506a439645917a649a56fc638c090c2e, type: 3}
 --- !u!114 &-4613646157870044833
 MonoBehaviour:
