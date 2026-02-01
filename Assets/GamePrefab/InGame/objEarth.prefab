@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EarthUnit
   _barrierObj: {fileID: 2259473750416935427}
   _initHp: 50
+  _deadSound: {fileID: 8300000, guid: 49abc8ce1a89c3149a9b50806e4a23aa, type: 3}
 --- !u!135 &7743548458040797572
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -15,11 +15,21 @@ public class EarthUnit : MonoBehaviour
     [SerializeField]
     int _initHp = 100;
     public ReactiveProperty<int> LifePoint = new ReactiveProperty<int>(10);
+    [SerializeField]
+    AudioClip _deadSound;
     List<BarrierSkillData> _barrierSkill = new ();
 
     protected void Awake()
     {
-        LifePoint.Value = _initHp;     
+        LifePoint.Subscribe((value) =>
+        {
+            if(LifePoint.Value <= 0)
+            {
+                AudioManager.Instance.PlayOneShotSe(_deadSound);
+            }
+        }).AddTo(this);
+
+        LifePoint.Value = _initHp;
 
         _barrierSkill.Add(new BarrierSkillData() { SkillId = 1 });
         _barrierSkill.Add(new BarrierSkillData() { SkillId = 2 });  
