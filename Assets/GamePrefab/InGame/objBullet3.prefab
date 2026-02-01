@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3974780749404170560}
   - component: {fileID: -4613646157870044833}
   - component: {fileID: 5923247707491214717}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: objBullet3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,8 +164,8 @@ MonoBehaviour:
   BaseScorePoint: 0
   HitTimes: 1
   OwnerShooter: {fileID: 0}
-  HitPlayerSe: {fileID: 8300000, guid: 70851f62f0400e9469f8709f0606b1bb, type: 3}
-  HitEarthSe: {fileID: 8300000, guid: 506a439645917a649a56fc638c090c2e, type: 3}
+  HitPlayerSe: {fileID: 8300000, guid: 6d3ef7f89a1d6f047992ca9466fd4354, type: 3}
+  HitEarthSe: {fileID: 0}
 --- !u!114 &-4613646157870044833
 MonoBehaviour:
   m_ObjectHideFlags: 0

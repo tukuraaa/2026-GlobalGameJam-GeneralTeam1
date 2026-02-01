@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
 {
-    [SerializeField, Tooltip("SE—p")]
+    [SerializeField, Tooltip("SEç”¨")]
     private AudioSource _seSource;
 
     public void PlayOneShotSe(AudioClip clip)
     {
-        _seSource.PlayOneShot(clip);
+        if(clip != null)
+        {
+            _seSource.PlayOneShot(clip);
+        }
     }
 }
