@@ -1,62 +1,146 @@
 using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using R3;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameView : MonoBehaviour
 {
-    [SerializeField]
-    TextMeshProUGUI _txtHitTimes;
-    [SerializeField]
-    TextMeshProUGUI _txtHp;
-
-    [SerializeField]
-    TextMeshProUGUI _txtScore;
 
     [SerializeField]
     Button _resetButton;
 
+    [SerializeField]
+    EarthUnit earthUnit;
+
+    [Space]
+    [Header("player 1")]
+
+    #region プレイヤー 1 スコアと力
+    // [SerializeField]
+    [SerializeField]
+    TextMeshProUGUI playerOneScoreText;
+
+
+
+    #endregion
+
+    [Space]
+    [Header("player 2")]
+
+    #region プレイヤー 2 スコアと力
+    [SerializeField]
+    TextMeshProUGUI playerTwoScoreText;
+    #endregion
+
+    [Space]
+    [Header("Earth HP")]
+
+
+    [SerializeField]
+    SimpleProgressBar EarthHPBar;
+
+    private int lastSecond = 0;
+
     public float TimeInGame {get; private set;}
-    public int lastSecond = 0;
+
+    public ReactiveProperty<int> playerOneScore = new ReactiveProperty<int>(0);
+    private int playerOnePrevScore = 0;
+    public ReactiveProperty<int> playerTwoScore = new ReactiveProperty<int>(0);
+    private int playerTwoPrevScore = 0;
+
 
     public Observable<Unit> ResetButtonClicked => _resetButton.OnClickAsObservable();
-    
 
-// public Observable a = Observable.Interval(TimeSpan.FromSeconds(1))
-//     .Select((_, i) => i)
-//     .Where(x => x % 2 == 0)
-//     .Subscribe(x => Console.WriteLine($"Interval:{x}"));
+    void OnValidate()
+    {
+        if(earthUnit == null)
+        {
+            earthUnit = FindFirstObjectByType<EarthUnit>(); //多分一つだけ、大丈夫
+        }
+    }
 
     void Start()
     {
+        EarthHPBar.Init(earthUnit.LifePoint.Value);
         new GameViewCtrl(this);
         TimeInGame = 0f;
+        playerOneScore.Subscribe(PlayerOneScoreHandler).AddTo(this);
+        // playerOneScore.SubscribeAwait<int>(PlayerOneScoreHandler).AddTo(this);
+        playerTwoScore.Subscribe(PlayerTwoScoreHandler).AddTo(this);
+        earthUnit.LifePoint.Subscribe(OnEarthDamage).AddTo(this);
+
     }
+
+    private void OnEarthDamage(int hp)
+    {
+        EarthHPBar.currentValue.Value = hp;
+    }
+
+    // private async ValueTask PlayerOneScoreHandler(int score, CancellationToken ct)
+    // {
+    //     await ScoreAnimation(playerOneScoreText, playerOnePrevScore, playerOneScore.Value);
+    // }
+
+    private void PlayerOneScoreHandler(int score)
+    {
+        playerOneScoreText.text = $@"0{score}00";
+    }
+
+    private void PlayerTwoScoreHandler(int score)
+    {
+
+        playerTwoScoreText.text = $@"0{score}00";
+    }
+
+    
+
+    // private async Task ScoreAnimation(TextMeshProUGUI text, int start, int end)
+    // {
+    //     float tempScore = start * 100;
+    //     int endScore = end * 100;
+    //     int diff = (end - start) * 100;
+    //     float increment = diff / 20f;
+    //     for (int i = 0; i < 20; i++)
+    //     {
+    //         tempScore += increment;
+    //         Debug.Log($"tempScore:{tempScore} vs {playerOneScore.Value}");
+    //         text.text = $"0{tempScore:f0}";
+    //         await UniTask.WaitForSeconds(0.05f);
+    //     }
+    // }
 
     void FixedUpdate()
     {
-        TimeInGame += (Time.fixedDeltaTime) * DataConst.ScoreRate(Stage.Instance.NowLevel.CurrentValue);
+        TimeInGame += Time.fixedDeltaTime * DataConst.ScoreRate(Stage.Instance.NowLevel.CurrentValue);
         if(Mathf.RoundToInt(TimeInGame) - lastSecond >= 1)
         {
-            lastSecond += 1;
-            UpdateScore(Mathf.RoundToInt(TimeInGame));
+            playerOnePrevScore = playerOneScore.Value;
+            playerOneScore.Value = Mathf.RoundToInt(TimeInGame);
+            playerTwoPrevScore = playerTwoScore.Value;
+            playerTwoScore.Value = Mathf.RoundToInt(TimeInGame);
         }
     }
 
     public void UpdateTimes(int times)
     {
-        _txtHitTimes.text = $@"HitTimes : {times}";
+        //just minus all their scores. 全部引くスコア。
+        playerOnePrevScore = playerOneScore.Value;
+        playerOneScore.Value -= Mathf.RoundToInt(DataConst.ScoreRate(Stage.Instance.NowLevel.CurrentValue));
+        playerTwoPrevScore = playerTwoScore.Value;
+        playerTwoScore.Value -= Mathf.RoundToInt(DataConst.ScoreRate(Stage.Instance.NowLevel.CurrentValue));
+
+
     }
 
     public void UpdateHp(int hp)
     {
-        _txtHp.text = $@"HP : {hp}";
+        EarthHPBar.currentValue.Value = hp; 
+        // _txtHp.text = $@"HP : {hp}";
     }    
 
-    public void UpdateScore(int score)
-    {
-        _txtScore.text = $@"Score : {score}";
-        
-    }
 }
