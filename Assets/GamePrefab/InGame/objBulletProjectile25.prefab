@@ -212,7 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageObj
   targetLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 257
   MaxTargets: -1
   ContinuousInterval: 0
   BaseDamagePoint: 1
@@ -220,8 +220,7 @@ MonoBehaviour:
   HitTimes: 1
   OwnerShooter: {fileID: 0}
   HitPlayerSe: {fileID: 8300000, guid: 506a439645917a649a56fc638c090c2e, type: 3}
-  HitEarthSe: {fileID: 8300000, guid: 506a439645917a649a56fc638c090c2e, type: 3}
-  _playHitObj: {fileID: 0}
+  HitEarthSe: {fileID: 8300000, guid: 8663633f52f7afc4cad566a8f3a2ebcd, type: 3}
 --- !u!114 &6459985082194080851
 MonoBehaviour:
   m_ObjectHideFlags: 0
