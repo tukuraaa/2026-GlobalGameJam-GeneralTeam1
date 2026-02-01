@@ -11,7 +11,8 @@ public class HighScoreView : MonoBehaviour
     [SerializeField]
     Button mainMenuButton;
 
-
+    [SerializeField]
+    SingleHighScoreGameObject prefab;
 
     private HighScoresObject highScores;
 
@@ -31,13 +32,19 @@ public class HighScoreView : MonoBehaviour
     }
     void Start()
     {
+        SingleHighScoreGameObject temp;
         highScores = HighScoresObject.LoadHighScore();
         if(highScores != null)
         {
             Debug.Log($"number of high scores: {highScores.highScores.Count}");
+            highScores.highScores.Sort();
             foreach (SingleHighScore highscore in highScores.highScores)
             {
                 Debug.Log(highscore);
+                
+                temp = Instantiate(prefab);
+                temp.Initialize(highscore.name, highscore.score);
+                temp.transform.SetParent(highScoreScroll.content);
             }
         }
         else
@@ -45,7 +52,6 @@ public class HighScoreView : MonoBehaviour
             Debug.Log($"やば。");
             HighScoresObject.TryCreateDataFile();
             highScores = HighScoresObject.LoadHighScore();
-            
         }
         new HighScoreViewCtrl(this);
     }

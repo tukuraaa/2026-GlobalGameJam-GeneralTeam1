@@ -82,6 +82,10 @@ public class HighScoresObject
     public static bool TryUpdateDataFile(SingleHighScore newHighScore)
     {
         HighScoresObject obj = LoadHighScore();
+        if(obj == null)
+        {
+            obj = new();
+        }
         obj.highScores.Add(newHighScore);
         string test = JsonConvert.SerializeObject(obj);
         File.WriteAllText(DataPath, test);

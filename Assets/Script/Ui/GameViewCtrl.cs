@@ -2,7 +2,6 @@ using R3;
 using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;
 using System.Threading;
-using ObservableCollections;
 using UnityEngine;
 
 public class GameViewCtrl
@@ -24,6 +23,8 @@ public class GameViewCtrl
         {
             onReset().Forget();
         }).AddTo(_view);
+        
+
 
         stage.EarthUnit.LifePoint.SubscribeAwait(OnHpChangedHandler).AddTo(_view);
 
