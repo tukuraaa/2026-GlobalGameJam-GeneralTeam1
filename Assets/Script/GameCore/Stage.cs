@@ -25,12 +25,28 @@ public class Stage : Singleton<Stage>
                 {
                     if(hitMsg.HitObj.gameObject.GetInstanceID() == EarthUnit.gameObject.GetInstanceID())
                     {
-                        EarthUnit.LifePoint.Value -= hitMsg.DamageObj.BaseDamagePoint;
-                        //Debug.Log($"EarthUnit Hit! Remaining LifePoint: {EarthUnit.LifePoint.Value}");
+                        if (hitMsg.DamageObj.BaseDamagePoint >= 0) // damage
+                        {
+                            EarthUnit.LifePoint.Value -= hitMsg.DamageObj.BaseDamagePoint;
+                            AudioManager.Instance.PlayOneShotSe(hitMsg.DamageObj.HitEarthSe);
+                        }
+                        Debug.Log($"EarthUnit Hit! Remaining LifePoint: {EarthUnit.LifePoint.Value}");
                     }
                     else if(hitMsg.HitObj.gameObject.GetInstanceID() == Player.gameObject.GetInstanceID())
                     {
-                        //Debug.Log("Player Hit");                        
+                        AudioManager.Instance.PlayOneShotSe(hitMsg.DamageObj.HitPlayerSe);
+
+                        if(hitMsg.DamageObj.BaseDamagePoint < 0)
+                        {
+                            // heal
+                            EarthUnit.LifePoint.Value -= hitMsg.DamageObj.BaseDamagePoint;
+                        }
+
+                        if (hitMsg.DamageObj.BaseScorePoint > 0)
+                        {
+                            // スコア増える処理
+                        }
+                        Debug.Log("Player Hit");
                     }
                 }
             ).AddTo(this);
@@ -49,7 +65,7 @@ public class Stage : Singleton<Stage>
         }
     }
 
-    //汚いパラメータ調整
+    //�����p�����[�^����
     void checkLevelOpenShooter()
     {
         if(NowLevel.CurrentValue > 6)
