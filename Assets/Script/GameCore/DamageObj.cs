@@ -16,6 +16,7 @@ public class DamageObj : MonoBehaviour
     public Shooter OwnerShooter;
     public AudioClip HitPlayerSe = null;
     public AudioClip HitEarthSe = null;
+    public AudioClip HitBarrierSe = null;
 
     public void Initialize(Shooter owner, float lifetime)
     {

@@ -18,7 +18,12 @@ public class Player : MonoBehaviour
     /// プレイヤーの移動速度の変数
     /// </summary>
     [SerializeField]
-    private float _speed = 5f;
+    private float _speed = 10f;
+    /// <summary>
+    /// 速度の初期値の変数
+    /// </summary>
+    [SerializeField]
+    private float _initialSpeed = 10f;
     /// <summary>
     /// プレイヤーの角度軸A（楕円の長軸）の変数
     /// </summary>
@@ -50,6 +55,18 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _waitTime = 2f;
     /// <summary>
+    /// 加速するまでにかかる時間の変数
+    /// </summary>
+    [SerializeField]
+    private float _accelerationTime = 1f;
+    /// <summary>
+    /// 加速時の速度変化量の変数
+    /// </summary>
+    [SerializeField]
+    private float _velocitySpeed = 2f;
+    [SerializeField]
+    private float _limitSpeed = 15f;
+    /// <summary>
     /// プレイヤーIDの変数
     /// </summary>
     [SerializeField]
@@ -58,7 +75,7 @@ public class Player : MonoBehaviour
     /// プレイヤー接触時のイベント変数
     /// </summary>
     [SerializeField]
-    private UnityEvent onEnter = null;
+    private UnityEvent _onEnter = null;
 
     /// <summary>
     /// プレイヤーの水平方向入力値の変数
@@ -95,20 +112,32 @@ public class Player : MonoBehaviour
     /// <summary>
     /// プレイヤー接触時のイベントのプロパティ
     /// </summary>
-    public UnityEvent OnEnter { get => onEnter; set => onEnter = value; }
+    public UnityEvent _OnEnter { get => _onEnter; set => _onEnter = value; }
 
     /// <summary>
     /// プレイヤーの位置を楕円軌道上に更新する関数
     /// </summary>
-    void Update()
+    private void Update()
     {
         // 入力が一定時間以上で、操作が有効な場合にのみ移動処理を実行
         if (Mathf.Abs(_horizontalX) > _inputTime && _isActiving)
         {
             // 入力方向に応じて角度を更新、HorizontalX < 0 で左移動、> 0 で右移動
             // _speedで角速度を制御、時間ステップでスムーズな移動を保証
-            float angleSpeed = _speed / Mathf.Max(_radiusA, _radiusB);// 正規化された角速度
-            _currentAngle += _horizontalX * angleSpeed * Time.deltaTime;// 角度を更新
+            float _angleSpeed = _speed / Mathf.Max(_radiusA, _radiusB);// 正規化された角速度
+            _currentAngle += _horizontalX * _angleSpeed * Time.deltaTime;// 角度を更新
+
+            // 一秒間キーを入力し続けたら速度の大きさが大きくなるように調整
+            if(_accelerationTime > 0)
+                {
+                _speed += _velocitySpeed * Time.deltaTime / _accelerationTime;// 徐々に速度を増加
+
+                // 速度が上限を超えないように制限
+                if (_speed >= _limitSpeed)
+                {
+                    _speed = _limitSpeed;// 速度を上限に制限
+                }
+            }
 
             // 角度を[0, 2π]の範囲内に保持
             if (_currentAngle < 0) _currentAngle += _piMultiplier * Mathf.PI;// 2πを超えた場合に調整
@@ -164,7 +193,7 @@ public class Player : MonoBehaviour
         // プレイヤー接触判定
         if (other.CompareTag("Player"))
         {
-            OnEnter.Invoke();
+            _OnEnter.Invoke();
         }  
     }
 
@@ -215,6 +244,14 @@ public class Player : MonoBehaviour
             _horizontalX = _moveInputValue.x;// 水平方向の入力値を設定
             _verticalY = _moveInputValue.y;// 垂直方向の入力値を設定
             _isMoving = (Mathf.Abs(_verticalY) != 0 || Mathf.Abs(_horizontalX) != 0);// 移動状態を更新
+            _accelerationTime++;// 加速時間をインクリメント
+
+            // 移動していない場合
+            if (!_isMoving)
+            {
+                _accelerationTime = 0;// 加速時間をリセット
+                _speed = _initialSpeed;// 速度を初期値にリセット
+            }
         }
     }
 
