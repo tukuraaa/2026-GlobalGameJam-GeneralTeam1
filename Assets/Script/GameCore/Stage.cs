@@ -15,6 +15,8 @@ public class Stage : Singleton<Stage>
     float _totalTime = 0f;
     int _playerLayer;
     int _defaultLayer;
+    [SerializeField]
+    AudioClip _bgm;
 
     void Start()
     {
@@ -31,6 +33,8 @@ public class Stage : Singleton<Stage>
                 }
             ).AddTo(this);
         }
+
+        AudioManager.Instance.PlayBgm(_bgm);
     }
 
     void DoHitReaction(ShooterMsg hitMsg)
