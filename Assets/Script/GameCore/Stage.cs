@@ -23,12 +23,11 @@ public class Stage : Singleton<Stage>
             shooter.OnHit().Subscribe(
                 (hitMsg) =>
                 {
-                    Debug.Log($"hitMsg.HitObj: {hitMsg.HitObj}");
                     if(hitMsg.HitObj.gameObject.GetInstanceID() == EarthUnit.gameObject.GetInstanceID())
                     {
                         if (hitMsg.DamageObj.BaseDamagePoint >= 0) // damage
                         {
-                            EarthUnit.LifePoint.Value -= hitMsg.DamageObj.BaseDamagePoint;
+                            EarthUnit.DoDamage(hitMsg.DamageObj.BaseDamagePoint);
                             AudioManager.Instance.PlayOneShotSe(hitMsg.DamageObj.HitEarthSe);
                         }
                         Debug.Log($"EarthUnit Hit! Remaining LifePoint: {EarthUnit.LifePoint.Value}");
@@ -40,7 +39,7 @@ public class Stage : Singleton<Stage>
                         if(hitMsg.DamageObj.BaseDamagePoint < 0)
                         {
                             // heal
-                            EarthUnit.LifePoint.Value -= hitMsg.DamageObj.BaseDamagePoint;
+                            EarthUnit.DoDamage(hitMsg.DamageObj.BaseDamagePoint);
                         }
 
                         if (hitMsg.DamageObj.BaseScorePoint > 0)
@@ -66,7 +65,7 @@ public class Stage : Singleton<Stage>
         }
     }
 
-    //�����p�����[�^����
+    //汚いパラメータ調整
     void checkLevelOpenShooter()
     {
         if(NowLevel.CurrentValue > 6)
