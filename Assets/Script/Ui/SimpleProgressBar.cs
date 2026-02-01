@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using R3;
 using TMPro;
 using UnityEngine;
@@ -69,7 +70,7 @@ public class SimpleProgressBar : MonoBehaviour
             Debug.Log($"value:{value} vs: {maxValue}");
             // Debug.Log($"newX: {startingDimension * value / maxValue} prevX: {startingDimension}");
             newDelta.x = startingDimension * value / maxValue;
-            rectTransform.sizeDelta = Vector2.Lerp(rectTransform.sizeDelta, newDelta, 0.5f);
+            rectTransform.DOSizeDelta(newDelta, 0.5f);
         }
         else
         {

@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using R3;
 using TMPro;
 using UnityEngine;
@@ -81,38 +82,16 @@ public class GameView : MonoBehaviour
         EarthHPBar.currentValue.Value = hp;
     }
 
-    // private async ValueTask PlayerOneScoreHandler(int score, CancellationToken ct)
-    // {
-    //     await ScoreAnimation(playerOneScoreText, playerOnePrevScore, playerOneScore.Value);
-    // }
-
     private void PlayerOneScoreHandler(int score)
     {
-        playerOneScoreText.text = $@"0{score}00";
+        playerOneScoreText.DOText($@"0{score}00", 0.5f, scrambleMode: ScrambleMode.Numerals);
     }
 
     private void PlayerTwoScoreHandler(int score)
     {
 
-        playerTwoScoreText.text = $@"0{score}00";
+        playerTwoScoreText.DOText($@"0{score}00", 0.5f, scrambleMode: ScrambleMode.Numerals);
     }
-
-    
-
-    // private async Task ScoreAnimation(TextMeshProUGUI text, int start, int end)
-    // {
-    //     float tempScore = start * 100;
-    //     int endScore = end * 100;
-    //     int diff = (end - start) * 100;
-    //     float increment = diff / 20f;
-    //     for (int i = 0; i < 20; i++)
-    //     {
-    //         tempScore += increment;
-    //         Debug.Log($"tempScore:{tempScore} vs {playerOneScore.Value}");
-    //         text.text = $"0{tempScore:f0}";
-    //         await UniTask.WaitForSeconds(0.05f);
-    //     }
-    // }
 
     void FixedUpdate()
     {
