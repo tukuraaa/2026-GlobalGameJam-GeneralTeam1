@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 1233959123618071674}
   - component: {fileID: 3834592576802452476}
   - component: {fileID: 2369853030728831220}
-  - component: {fileID: 7899966765312709806}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: objPlayer1
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -35,7 +34,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5368415166434031289}
-  - {fileID: 3776153402011700347}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &390055880798133343
@@ -65,7 +63,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.1, y: 1.2, z: 1.2}
+  m_Size: {x: 2, y: 1.2, z: 1.2}
   m_Center: {x: 0.25, y: 0, z: 0}
 --- !u!114 &3834592576802452476
 MonoBehaviour:
@@ -83,10 +81,17 @@ MonoBehaviour:
   _speed: 12
   _radiusA: 3.5
   _radiusB: 3.5
-  HorizontalX: 0
-  VerticalY: 0
-  IsMoving: 0
   _currentAngle: 3.14159
+  _inputTime: 0.01
+  _stopTime: 1
+  _playerId: 1
+  _playerCollider: {fileID: 1233959123618071674}
+  _otherCollider: {fileID: 0}
+  _horizontalX: 0
+  _verticalY: 0
+  _piMultiplier: 2
+  _isMoving: 0
+  _isStopON: 1
 --- !u!114 &2369853030728831220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +121,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3834592576802452476}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnMove
+        m_MethodName: MoveInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -133,7 +138,19 @@ MonoBehaviour:
     m_ActionId: 6b444451-8a00-4d00-a97e-f47457f736a8
     m_ActionName: 'Player/Look[/DualShock4GamepadHID/rightStick,/Mouse/delta]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3834592576802452476}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: BarrierInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6c2ab1b8-8984-453a-af3d-a3c78ae1679a
     m_ActionName: 'Player/Attack[/DualShock4GamepadHID/buttonWest,/Mouse/leftButton,/Keyboard/enter]'
   - m_PersistentCalls:
@@ -205,86 +222,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &7899966765312709806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8763340661703558685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a63e35ac89d1a45caa18d6a0084df78b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerPower
-  fullDuration: 30
-  powerType: 0
-  barrier: {fileID: 538286519077714612}
-  usePowerInputAction:
-    m_Name: Use Power Input
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: b3a06677-d68b-4beb-be34-dfd4ecb6c760
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: ba093e87-2a7f-41d2-8cd6-34d36c956cc0
-      m_Path: <Keyboard>/leftArrow
-      m_Interactions: Tap
-      m_Processors: 
-      m_Groups: 
-      m_Action: Use Power Input
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 06646d14-de53-49a0-899e-ab487cc0faf4
-      m_Path: <Keyboard>/rightArrow
-      m_Interactions: Tap
-      m_Processors: 
-      m_Groups: 
-      m_Action: Use Power Input
-      m_Flags: 0
-    - m_Name: Joystick
-      m_Id: f61f0458-83b0-45e9-aec2-55196a660258
-      m_Path: 2DVector
-      m_Interactions: Tap
-      m_Processors: 
-      m_Groups: 
-      m_Action: Use Power Input
-      m_Flags: 4
-    - m_Name: Up
-      m_Id: 984206cc-3b30-441d-bd33-a96184a9d222
-      m_Path: 
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Use Power Input
-      m_Flags: 8
-    - m_Name: Down
-      m_Id: 46a41885-3465-470b-92db-4b478fd233bf
-      m_Path: 
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Use Power Input
-      m_Flags: 8
-    - m_Name: Left
-      m_Id: e5e1cde4-d21d-446f-8b4a-34e9c46d725b
-      m_Path: <Gamepad>/rightStick/left
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Use Power Input
-      m_Flags: 8
-    - m_Name: Right
-      m_Id: f7a7b147-3d6a-41ec-a636-c68be393322c
-      m_Path: <Gamepad>/rightStick/right
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Use Power Input
-      m_Flags: 8
-    m_Flags: 0
 --- !u!1001 &3747044280926477910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -380,98 +317,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9115388781390113007, guid: cd6821538db85a0479f351bb0ecdc82d, type: 3}
   m_PrefabInstance: {fileID: 3747044280926477910}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5275232389253136729
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 205832169761784459}
-    m_Modifications:
-    - target: {fileID: 8509873408680105880, guid: 2d65f04428e301a498c85b1fbd994587, type: 3}
-      propertyPath: m_Name
-      value: Barrier
-      objectReference: {fileID: 0}
-    - target: {fileID: 8509873408680105880, guid: 2d65f04428e301a498c85b1fbd994587, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9030548946406853922, guid: 2d65f04428e301a498c85b1fbd994587, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9030548946406853922, guid: 2d65f04428e301a498c85b1fbd994587, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9030548946406853922, guid: 2d65f04428e301a498c85b1fbd994587, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9030548946406853922, guid: 2d65f04428e301a498c85b1fbd994587, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9030548946406853922, guid: 2d65f04428e301a498c85b1fbd994587, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9030548946406853922, guid: 2d65f04428e301a498c85b1fbd994587, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9030548946406853922, guid: 2d65f04428e301a498c85b1fbd994587, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9030548946406853922, guid: 2d65f04428e301a498c85b1fbd994587, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9030548946406853922, guid: 2d65f04428e301a498c85b1fbd994587, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9030548946406853922, guid: 2d65f04428e301a498c85b1fbd994587, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8509873408680105880, guid: 2d65f04428e301a498c85b1fbd994587, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 538286519077714612}
-  m_SourcePrefab: {fileID: 100100000, guid: 2d65f04428e301a498c85b1fbd994587, type: 3}
---- !u!4 &3776153402011700347 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9030548946406853922, guid: 2d65f04428e301a498c85b1fbd994587, type: 3}
-  m_PrefabInstance: {fileID: 5275232389253136729}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4552091593690715841 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8509873408680105880, guid: 2d65f04428e301a498c85b1fbd994587, type: 3}
-  m_PrefabInstance: {fileID: 5275232389253136729}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &538286519077714612
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4552091593690715841}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0.25, y: 0, z: 0}
